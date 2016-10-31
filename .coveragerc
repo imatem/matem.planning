@@ -1,0 +1,6 @@
+[report]
+include =
+    src/matem/*
+omit =
+    */test*
+    */upgrades/*
