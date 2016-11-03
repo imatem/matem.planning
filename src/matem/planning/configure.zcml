@@ -17,8 +17,8 @@
       directory="profiles/default"
       description="Installs the matem.planning add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.post_install"
       />
+      <!-- post_handler=".setuphandlers.post_install" -->
 
   <genericsetup:registerProfile
       name="uninstall"
@@ -26,8 +26,8 @@
       directory="profiles/uninstall"
       description="Uninstalls the matem.planning add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.uninstall"
       />
+      <!-- post_handler=".setuphandlers.uninstall" -->
 
 
   <utility
