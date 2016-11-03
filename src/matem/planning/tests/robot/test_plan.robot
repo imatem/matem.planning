@@ -56,10 +56,10 @@ a logged-in site administrator
   Enable autologin as  Site Administrator
 
 an add plan form
-  Go To  ${PLONE_URL}/++add++Plan
+  Go To  ${PLONE_URL}/++add++plan
 
 a plan 'My Plan'
-  Create content  type=Plan  id=my-plan  title=My Plan
+  Create content  type=plan  id=my-plan  title=My Plan
 
 
 # --- WHEN -------------------------------------------------------------------

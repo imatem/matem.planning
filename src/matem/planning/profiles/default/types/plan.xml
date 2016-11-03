@@ -2,7 +2,7 @@
 <object
     i18n:domain="matem.planning"
     meta_type="Dexterity FTI"
-    name="Plan"
+    name="plan"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic properties -->
@@ -14,7 +14,7 @@
       name="description"></property>
 
   <property name="allow_discussion">False</property>
-  <property name="factory">Plan</property>
+  <property name="factory">plan</property>
   <property name="icon_expr"></property>
   <property name="link_target"></property>
 
@@ -30,7 +30,7 @@
   <property name="klass">plone.dexterity.content.Item</property>
   <property name="model_file"></property>
   <property name="model_source"></property>
-  <property name="schema">matem.planning.interfaces.IPlan</property>
+  <property name="schema">matem.planning.content.plan.IPlan</property>
 
   <!-- Enabled behaviors -->
   <property name="behaviors">
@@ -38,7 +38,7 @@
   </property>
 
   <!-- View information -->
-  <property name="add_view_expr">string:${folder_url}/++add++Plan</property>
+  <property name="add_view_expr">string:${folder_url}/++add++plan</property>
   <property name="immediate_view">view</property>
   <property name="default_view">view</property>
   <property name="default_view_fallback">False</property>
