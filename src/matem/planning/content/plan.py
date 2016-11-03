@@ -2,6 +2,8 @@
 """Module where all interfaces, events and exceptions live."""
 
 from matem.planning import _
+from plone.directives import form
+# from plone.namedfile.field import NamedBlobFile
 from plone.supermodel import model
 from zope import schema
 
@@ -14,12 +16,13 @@ class IPlan(model.Schema):
         required=True,
     )
 
-    description = schema.Text(
-        title=_(u'Description'),
+    form.widget('text', cols=80, rows=20)
+    text = schema.Text(
+        title=_(u'Text'),
         required=False,
     )
 
-    file = schema.Text(
-        title=_(u'Description'),
-        required=False,
-    )
+    # file = NamedBlobFile(
+    #     title=_(u'File'),
+    #     required=False,
+    # )
