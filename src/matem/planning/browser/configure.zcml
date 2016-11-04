@@ -18,4 +18,13 @@
       directory="static"
       />
 
+  <browser:page
+      name="planview"
+      for="*"
+      layer="zope.interface.Interface"
+      class=".views.PlanView"
+      template="templates/planview.pt"
+      permission="zope2.View"
+      />
+
 </configure>

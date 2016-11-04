@@ -40,10 +40,10 @@
   <!-- View information -->
   <property name="add_view_expr">string:${folder_url}/++add++plan</property>
   <property name="immediate_view">view</property>
-  <property name="default_view">view</property>
+  <property name="default_view">planview</property>
   <property name="default_view_fallback">False</property>
   <property name="view_methods">
-    <element value="view" />
+    <element value="planview" />
   </property>
 
   <!-- Method aliases -->
