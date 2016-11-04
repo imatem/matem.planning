@@ -3,7 +3,7 @@
 
 from matem.planning import _
 from plone.directives import form
-# from plone.namedfile.field import NamedBlobFile
+from plone.namedfile.field import NamedBlobFile
 from plone.supermodel import model
 from zope import schema
 
@@ -22,7 +22,7 @@ class IPlan(model.Schema):
         required=False,
     )
 
-    # file = NamedBlobFile(
-    #     title=_(u'File'),
-    #     required=False,
-    # )
+    file = NamedBlobFile(
+        title=_(u'File'),
+        required=False,
+    )

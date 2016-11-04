@@ -42,7 +42,7 @@ setup(
         # 'Products.GenericSetup>=1.8.2',
         'setuptools',
         'z3c.jbot',
-        'plone.directives.dexterity',
+        'plone.directives.form',
         'plone.app.dexterity',
     ],
     extras_require={
