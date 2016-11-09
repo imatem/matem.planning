@@ -1,0 +1,173 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="planning.matem">
+
+<metal:js fill-slot="javascript_head_slot">
+        <script
+          type="text/javascript"
+          tal:attributes="src string:++resource++matem.planning/pdfviewerplan.js">
+        </script>
+        <script
+          type="text/javascript"
+          tal:attributes="src string:++resource++matem.planning/pdf.min.js">
+        </script>
+
+  <script type="text/javascript">
+          // Auto fixed toolbar
+            // Credits: http://www.bennadel.com/blog
+      jQuery(function( $ ){
+      var placeholder = $( "#controls-wrapper" );
+      var message = $( "#controls" );
+      var view = $( window );
+      view.bind(
+        "scroll resize",
+        function(){
+          var placeholderTop = placeholder.offset().top;
+          var viewTop = view.scrollTop();
+          if (
+            (viewTop > placeholderTop) &&
+              !message.is( ".controls-fixed" )
+          ){
+            placeholder.height(
+            placeholder.height()
+            );
+            message.addClass( "controls-fixed" );
+
+          } else if (
+            (viewTop <= placeholderTop) &&
+            message.is( ".controls-fixed" )
+            ){
+              placeholder.css( "height", "auto" );
+              message.removeClass( "controls-fixed" );
+
+            }
+          }
+          );
+        });
+    </script>
+</metal:js>
+<body>
+
+  <metal:content-core fill-slot="content-core">
+    <p>Suitable for <em tal:replace="structure view/w/title/render"></em>
+    </p>
+
+    <!-- Caja de texto -->
+    <div tal:content="structure view/w/text/render" />
+
+    <!-- <div tal:content="context/file">
+        User
+    </div> -->
+
+    <!--esto muestra el enlace para verlo -->
+    <!-- <p>
+      <metal:field use-macro="python:context.widget('file', mode='view')">
+        File
+      </metal:field>
+    </p> -->
+    <div tal:define="file context/file; content_type file/contentType; filename python:file.filename.split('.')[0]">
+      <tal:block tal:condition="python: content_type=='application/pdf'">
+        tamaño <span tal:content="file/getSize"/>
+
+
+
+      <!-- viewer -->
+              <div id="controls-wrapper">
+              <div id="controls">
+            <button id="previous" onclick="PDFView.page--;" oncontextmenu="return false;">
+              <img src="++resource++collective.pdfjs.images/go-up.svg" align="top" height="32"/>
+              Previous
+            </button>
+
+            <button id="next" onclick="PDFView.page++;" oncontextmenu="return false;">
+              <img src="++resource++collective.pdfjs.images/go-down.svg" align="top" height="32"/>
+              Next
+            </button>
+
+            <input type="number"
+                id="pageNumber"
+                onchange="PDFView.page = this.value;"
+                value="1"
+                size="4"
+                min="1" />
+          <span>/</span>
+              <span id="numPages">--</span>
+
+            <div class="separator"></div>
+
+            <button id="zoomOut" title="Zoom Out" onclick="PDFView.zoomOut();" oncontextmenu="return false;">
+              <img src="++resource++collective.pdfjs.images/zoom-out.svg" align="top" height="32"/>
+            </button>
+            <button id="zoomIn" title="Zoom In" onclick="PDFView.zoomIn();" oncontextmenu="return false;">
+              <img src="++resource++collective.pdfjs.images/zoom-in.svg" align="top" height="32"/>
+            </button>
+
+            <div class="separator"></div>
+
+            <select id="scaleSelect" onchange="PDFView.parseScale(this.value);" oncontextmenu="return false;">
+              <option id="customScaleOption" value="custom"></option>
+              <option value="0.5">50%</option>
+              <option value="0.75">75%</option>
+              <option value="1" selected="selected">100%</option>
+              <option value="1.25">125%</option>
+              <option value="1.5">150%</option>
+              <option value="2">200%</option>
+              <option id="pageWidthOption" value="page-width">Page Width</option>
+              <option id="pageFitOption" value="page-fit">Page Fit</option>
+            </select>
+
+            <div class="separator"></div>
+
+            <a href="#" id="viewBookmark" title="Current View (bookmark or copy the location)" style="display: none;">
+              <img src="++resource++collective.pdfjs.images/bookmark.svg" alt="Bookmark" align="top" height="32"/>
+            </a>
+          </div>
+          </div>
+
+          <div id="sidebar">
+      <div id="sidebarBox">
+        <div id="sidebarScrollView">
+          <div id="sidebarView"></div>
+        </div>
+        <div id="outlineScrollView" hidden='true'>
+          <div id="outlineView"></div>
+        </div>
+        <div id="sidebarControls">
+          <button id="thumbsSwitch" title="Show Thumbnails" onclick="PDFView.switchSidebarView('thumbs')" data-selected>
+            <img src="++resource++collective.pdfjs.images/nav-thumbs.svg" align="top" height="32" alt="Thumbs" />
+          </button>
+          <button id="outlineSwitch" title="Show Document Outline" onclick="PDFView.switchSidebarView('outline')" disabled>
+            <img src="++resource++collective.pdfjs.images/nav-outline.svg" align="top" height="32" alt="Document Outline" />
+          </button>
+        </div>
+     </div>
+    </div>
+
+    <div id="loading">Loading... 0%</div>
+    <div id="viewer"></div>
+              <noscript>
+              <object i18n:translate="noscript_plugin_required"
+                tal:attributes="data filename|nothing"
+                type="application/pdf"
+                width="100%"
+                height="600">
+                PDF browser plugin required for preview.
+              </object>
+            </noscript>
+
+      </tal:block>
+    </div>
+
+
+
+
+
+  </metal:content-core>
+
+  <!-- <div tal:content="python: context.text">
+      Text
+  </div> -->
+
+</body>
+</html>
