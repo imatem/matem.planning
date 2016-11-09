@@ -4,13 +4,13 @@
       i18n:domain="planning.matem">
 
 <metal:js fill-slot="javascript_head_slot">
-        <!-- <script
-            type="text/javascript"
-            tal:attributes="src string:++resource++collective.pdfjs.ecmascripts/viewer.js">
-        </script> -->
         <script
           type="text/javascript"
           tal:attributes="src string:++resource++matem.planning/pdfviewerplan.js">
+        </script>
+        <script
+          type="text/javascript"
+          tal:attributes="src string:++resource++matem.planning/pdf.min.js">
         </script>
 
   <script type="text/javascript">
@@ -70,9 +70,7 @@
       <tal:block tal:condition="python: content_type=='application/pdf'">
         tamaño <span tal:content="file/getSize"/>
 
-        <!-- data <span tal:content="file/data"/> -->
 
-<!-- dsdhjfkhshfjshjdfhjshfjkdhsjhfjkshkfshfjkshdfjhsdf-->
 
       <!-- viewer -->
               <div id="controls-wrapper">
@@ -86,8 +84,6 @@
               <img src="++resource++collective.pdfjs.images/go-down.svg" align="top" height="32"/>
               Next
             </button>
-
-            <!-- <div class="separator"></div> -->
 
             <input type="number"
                 id="pageNumber"
