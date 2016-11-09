@@ -12,9 +12,14 @@
       />
 
   <!-- Publish static files -->
-  <plone:static
+  <!-- <plone:static
       name="matem.planning"
       type="plone"
+      directory="static"
+      /> -->
+
+  <browser:resourceDirectory
+      name="matem.planning"
       directory="static"
       />
 
