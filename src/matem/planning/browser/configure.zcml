@@ -32,4 +32,22 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      name="planview-v1"
+      for="*"
+      layer="zope.interface.Interface"
+      class=".views.PlanView"
+      template="templates/planview-v1.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="planview-v2"
+      for="*"
+      layer="zope.interface.Interface"
+      class=".views.PlanView"
+      template="templates/planview-v2.pt"
+      permission="zope2.View"
+      />
+
 </configure>

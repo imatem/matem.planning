@@ -3,33 +3,24 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="planning.matem">
 
-<metal:js fill-slot="javascript_head_slot">
-
-
-        <script
-          type="text/javascript"
-          tal:attributes="src string:++resource++matem.planning/pdf.worker.js">
-        </script>
-
-        <script
-          type="text/javascript"
-          tal:attributes="src string:++resource++matem.planning/l1On.js">
-        </script>
-
-        <script
-          type="text/javascript"
-          tal:attributes="src string:++resource++matem.planning/pdf.js">
-        </script>
-
-        <script
-          type="text/javascript"
-          tal:attributes="src string:++resource++matem.planning/viewer.js">
-        </script>
-
-
-
-
-</metal:js>
+  <metal:js fill-slot="javascript_head_slot">
+    <script
+      type="text/javascript"
+      tal:attributes="src string:++resource++matem.planning/pdf.worker.js">
+    </script>
+    <script
+      type="text/javascript"
+      tal:attributes="src string:++resource++matem.planning/l1On.js">
+    </script>
+    <script
+      type="text/javascript"
+      tal:attributes="src string:++resource++matem.planning/pdf.js">
+    </script>
+    <script
+      type="text/javascript"
+      tal:attributes="src string:++resource++matem.planning/imviewer.js">
+    </script>
+  </metal:js>
 <body>
 
   <metal:content-core fill-slot="content-core">
@@ -45,34 +36,35 @@
 
         <div id="outerContainer">
 
-      <div id="sidebarContainer" style="display: none;">
-        <div id="toolbarSidebar">
-          <div class="splitToolbarButton toggled">
-            <button id="viewThumbnail" class="toolbarButton group toggled" title="Show Thumbnails" tabindex="2" data-l10n-id="thumbs">
-               <span data-l10n-id="thumbs_label">Thumbnails</span>
-            </button>
-            <button id="viewOutline" class="toolbarButton group" title="Show Document Outline" tabindex="3" data-l10n-id="outline">
-               <span data-l10n-id="outline_label">Document Outline</span>
-            </button>
-            <button id="viewAttachments" class="toolbarButton group" title="Show Attachments" tabindex="4" data-l10n-id="attachments">
-               <span data-l10n-id="attachments_label">Attachments</span>
-            </button>
-          </div>
-        </div>
-        <div id="sidebarContent">
-          <div id="thumbnailView">
-          </div>
-          <div id="outlineView" class="hidden">
-          </div>
-          <div id="attachmentsView" class="hidden">
-          </div>
-        </div>
-      </div>
+          <div id="sidebarContainer">
+            <div id="toolbarSidebar">
+              <div class="splitToolbarButton toggled">
+                <button id="viewThumbnail" class="toolbarButton group toggled" title="Show Thumbnails" tabindex="2" data-l10n-id="thumbs">
+                   <span data-l10n-id="thumbs_label">Thumbnails</span>
+                </button>
+                <!-- <button id="viewOutline" class="toolbarButton group" title="Show Document Outline" tabindex="3" data-l10n-id="outline">
+                   <span data-l10n-id="outline_label">Document Outline</span>
+                </button> -->
+                <button id="viewAttachments" class="toolbarButton group" title="Show Attachments" tabindex="4" data-l10n-id="attachments">
+                   <span data-l10n-id="attachments_label">Attachments</span>
+                </button>
+              </div>
+            </div>
 
-      <!-- sidebarContainer -->
+            <div id="sidebarContent">
+              <div id="thumbnailView">
+              </div>
+              <div id="outlineView" class="hidden">
+              </div>
+              <div id="attachmentsView" class="hidden">
+              </div>
+            </div>
+          </div>
+          <!-- sidebarContainer -->
 
       <div id="mainContainer">
-        <div class="findbar hidden doorHanger hiddenSmallView" id="findbar" style="display: none;">
+        <!-- <div class="findbar hidden doorHanger hiddenSmallView" id="findbar" style="display: none;"> -->
+        <div class="findbar hidden doorHanger hiddenSmallView" id="findbar">
           <label for="findInput" class="toolbarLabel" data-l10n-id="find_label">Find:</label>
           <input id="findInput" class="toolbarField" tabindex="91">
           <div class="splitToolbarButton">
@@ -92,7 +84,8 @@
           <span id="findMsg" class="toolbarLabel"></span>
         </div>  <!-- findbar -->
 
-        <div id="secondaryToolbar" class="secondaryToolbar hidden doorHangerRight" style="display: none;">
+        <!-- <div id="secondaryToolbar" class="secondaryToolbar hidden doorHangerRight" style="display: none;"> -->
+        <div id="secondaryToolbar" class="secondaryToolbar hidden doorHangerRight">
           <div id="secondaryToolbarButtonContainer">
             <button id="secondaryPresentationMode" class="secondaryToolbarButton presentationMode visibleLargeView" title="Switch to Presentation Mode" tabindex="51" data-l10n-id="presentation_mode">
               <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
@@ -149,7 +142,8 @@
         <div class="toolbar">
           <div id="toolbarContainer">
             <div id="toolbarViewer">
-              <div id="toolbarViewerLeft" style="display: none;">
+              <!-- <div id="toolbarViewerLeft" style="display: none;"> -->
+              <div id="toolbarViewerLeft">
                 <button id="sidebarToggle" class="toolbarButton" title="Toggle Sidebar" tabindex="11" data-l10n-id="toggle_sidebar">
                   <span data-l10n-id="toggle_sidebar_label">Toggle Sidebar</span>
                 </button>
@@ -170,7 +164,8 @@
                 <input type="number" id="pageNumber" class="toolbarField pageNumber" value="1" size="4" min="1" tabindex="15">
                 <span id="numPages" class="toolbarLabel"></span>
               </div>
-              <div id="toolbarViewerRight" style="display: none;">
+              <!-- <div id="toolbarViewerRight" style="display: none;"> -->
+              <div id="toolbarViewerRight">
                 <button id="presentationMode" class="toolbarButton presentationMode hiddenLargeView" title="Switch to Presentation Mode" tabindex="31" data-l10n-id="presentation_mode">
                   <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
                 </button>
@@ -198,7 +193,8 @@
               </div>
               <div class="outerCenter">
                 <div class="innerCenter" id="toolbarViewerMiddle">
-                  <div class="splitToolbarButton" style="display: none;">
+                  <!-- <div class="splitToolbarButton" style="display: none;"> -->
+                  <div class="splitToolbarButton">
                     <button id="zoomOut" class="toolbarButton zoomOut" title="Zoom Out" tabindex="21" data-l10n-id="zoom_out">
                       <span data-l10n-id="zoom_out_label">Zoom Out</span>
                     </button>
@@ -271,7 +267,8 @@
         </div>
       </div> <!-- mainContainer -->
 
-      <div id="overlayContainer" class="hidden" style="display: none;">
+      <!-- <div id="overlayContainer" class="hidden" style="display: none;"> -->
+      <div id="overlayContainer" class="hidden">
         <div id="passwordOverlay" class="container hidden">
           <div class="dialog">
             <div class="row">
@@ -287,7 +284,8 @@
             </div>
           </div>
         </div>
-        <div id="documentPropertiesOverlay" class="container hidden" style="display: none;">
+        <!-- <div id="documentPropertiesOverlay" class="container hidden" style="display: none;"> -->
+        <div id="documentPropertiesOverlay" class="container hidden">
           <div class="dialog">
             <div class="row">
               <span data-l10n-id="document_properties_file_name">File name:</span> <p id="fileNameField">-</p>
@@ -335,8 +333,10 @@
       </div>  <!-- overlayContainer -->
 
     </div> <!-- outerContainer -->
-    <div id="printContainer" style="display: none;"></div>
-<div id="mozPrintCallback-shim" hidden style="display: none;">
+    <!-- <div id="printContainer" style="display: none;"></div> -->
+    <div id="printContainer"></div>
+    <!-- <div id="mozPrintCallback-shim" hidden style="display: none;"> -->
+  <div id="mozPrintCallback-shim" hidden>
   <style>
 @media print {
   #printContainer div {

@@ -45,6 +45,8 @@
   <property name="view_methods">
     <element value="view"/>
     <element value="planview" />
+    <element value="planview-v1" />
+    <element value="planview-v2" />
   </property>
 
   <!-- Method aliases -->
