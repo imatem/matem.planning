@@ -4,8 +4,6 @@
 'use strict';
 
 var context = document.location.href.split('/');
-// planes/plan-de-trabajo-2016/view/++widget++form.widgets.file/@@download/CEO151124DX8FF139.pdf
-// planes/plan-de-trabajo-2016/view/++widget++form.widgets.file/download/CEO151124DX8FF139.pdf
 var clongit = context.length;
 if (context[clongit - 1].indexOf("?_authenticator=") !== -1){
   context.pop();
@@ -13,7 +11,6 @@ if (context[clongit - 1].indexOf("?_authenticator=") !== -1){
 context.push('view');
 context.push('++widget++form.widgets.file');
 context.push('download');
-// context.splice(context.length - 1, 1, 'download');
 var kDefaultURL = context.join('/');
 var kDefaultScale = 1;
 var kDefaultScaleDelta = 1.1;

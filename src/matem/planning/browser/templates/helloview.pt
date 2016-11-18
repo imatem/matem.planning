@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="planning.matem">
+
+<metal:css fill-slot="style_slot">
+  <link href="#" type="text/css" tal:attributes="href string:++resource++matem.planning/viewer.css"/>
+</metal:css>
+
+
+<metal:js fill-slot="javascript_head_slot">
+
+  <script
+    type="text/javascript"
+    tal:attributes="src string:++resource++matem.planning/pdf.js">
+  </script>
+
+  <script type="text/javascript"
+    type="text/javascript"
+    tal:attributes="src string:++resource++matem.planning/helloview.js">
+  </script>
+
+</metal:js>
+<body>
+
+  <metal:content-core fill-slot="content-core">
+
+    <p>Suitable for <em tal:replace="structure view/w/title/render"></em>
+    </p>
+
+    <!-- Caja de texto -->
+    <div tal:content="structure view/w/text/render" />
+
+    <div tal:define="file context/file; content_type file/contentType; filename python:file.filename.split('.')[0]">
+      <tal:block tal:condition="python: content_type=='application/pdf'">
+        tamaño <span tal:content="file/getSize"/>
+
+
+        <div>
+          <button id="prev">Previous</button>
+          <button id="next">Next</button>
+          &nbsp; &nbsp;
+          <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+        </div>
+
+        <div>
+          <canvas id="the-canvas" style="border:1px solid black"></canvas>
+        </div>
+        <!-- <canvas id="the-canvas" style="border:1px  solid black"></canvas> -->
+
+        <!-- <script>
+          document.getElementById('code').textContent =
+          document.getElementById('script').text;
+        </script> -->
+
+      </tal:block>
+    </div>
+  </metal:content-core>
+
+</body>
+</html>
