@@ -26,14 +26,18 @@ var clongit = context.length;
 if (context[clongit - 1].indexOf("?_authenticator=") !== -1){
   context.pop();
 }
-context.push('view');
+
+if (context.indexOf("view") >= 0){
+
+}
+else{
+    context.push('view');
+}
+
 context.push('++widget++form.widgets.file');
 context.push('download');
 // context.splice(context.length - 1, 1, 'download');
 var DEFAULT_URL = context.join('/');
-
-
-
 
   var pdfjsWebLibs = {
     pdfjsWebPDFJS: window.pdfjsDistBuildPdf
