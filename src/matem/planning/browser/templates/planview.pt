@@ -40,9 +40,16 @@
 
     <tal:block tal:condition="view/hasfile" tal:define="file context/file;">
 
+    <br/><br/><br/>
     <div tal:define="content_type file/contentType; filename python:file.filename.split('.')[0]">
+
+      <tal:block tal:condition="python: content_type and content_type!='application/pdf'">
+        Por favor sólo use archivos pdf
+      </tal:block>
+
+
       <tal:block tal:condition="python: content_type and content_type=='application/pdf'">
-        tamaño <span tal:content="file/getSize"/>
+        <!-- tamaño <span tal:content="file/getSize"/> -->
 
         <div id="outerContainer">
 
@@ -158,7 +165,7 @@
                   <span data-l10n-id="toggle_sidebar_label">Toggle Sidebar</span>
                 </button>
                 <div class="toolbarButtonSpacer"></div>
-                <button id="viewFind" class="toolbarButton group hiddenSmallView" title="Find in Document" tabindex="12" data-l10n-id="findbar">
+                <button id="viewFind" class="toolbarButton group hiddenSmallView" title="Find in Document" tabindex="12" data-l10n-id="findbar" style="display:none;">
                    <span data-l10n-id="findbar_label">Find</span>
                 </button>
                 <div class="splitToolbarButton" style="display: none;">
