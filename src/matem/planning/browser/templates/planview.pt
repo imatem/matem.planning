@@ -30,8 +30,8 @@
 <body>
 
   <metal:content-core fill-slot="content-core">
-    <p>Suitable for <em tal:replace="structure view/w/title/render"></em>
-    </p>
+    <!-- <p>Suitable for <em tal:replace="structure view/w/title/render"></em>
+    </p> -->
 
     <!-- Caja de texto -->
     <div tal:content="structure view/w/text/render" />
@@ -184,7 +184,7 @@
                   <span data-l10n-id="open_file_label">Open</span>
                 </button>
 
-                <button id="print" class="toolbarButton print hiddenMediumView" title="Print" tabindex="33" data-l10n-id="print">
+                <button id="print" class="toolbarButton print hiddenMediumView" title="Print" tabindex="33" data-l10n-id="print" style="display: none;">
                   <span data-l10n-id="print_label">Print</span>
                 </button>
 
