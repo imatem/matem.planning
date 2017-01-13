@@ -34,9 +34,15 @@
       factory=".setuphandlers.HiddenProfiles"
       name="matem.planning-hiddenprofiles" />
 
+  <!--Vocabularies -->
   <utility
       component=".content.plan.PlanTypesVocabulary"
       name="matem.sis.PlanTypesVocabulary"
       />
+
+  <!-- SUBSCRIBERS -->
+  <subscriber handler=".handlers.handlerCreatedPlan" />
+  <subscriber handler=".handlers.handlerModifiedPlan" />
+
 
 </configure>
