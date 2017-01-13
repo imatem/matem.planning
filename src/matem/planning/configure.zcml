@@ -34,4 +34,9 @@
       factory=".setuphandlers.HiddenProfiles"
       name="matem.planning-hiddenprofiles" />
 
+  <utility
+      component=".content.plan.PlanTypesVocabulary"
+      name="matem.sis.PlanTypesVocabulary"
+      />
+
 </configure>
