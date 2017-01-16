@@ -7979,6 +7979,9 @@ function validateFileURL(file) {
 function webViewerInitialized() {
   var queryString = document.location.search.substring(1);
   var params = parseQueryString(queryString);
+  if ($("#plan_type").text() == 'plantext'){
+    DEFAULT_URL = DEFAULT_URL.replace('++widget++form.widgets.file', '++widget++form.widgets.textfile');
+  }
   var file = 'file' in params ? params.file : DEFAULT_URL;
   validateFileURL(file);
 
