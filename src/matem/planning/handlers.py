@@ -8,6 +8,8 @@ import os
 from plone import namedfile
 # from plone.namedfile.field import NamedBlobFile
 
+from plone import api
+
 PLAN_LATEX_TEMPLATE = r"""
     \documentclass[11pt, letterpaper]{article}
     \usepackage[utf8]{inputenc}
@@ -30,6 +32,7 @@ PLAN_LATEX_TEMPLATE = r"""
 def handlerCreatedPlan(self, event):
 
     plant = self.plan_type
+
 
     if plant == 'plantext':
 
@@ -62,6 +65,7 @@ def handlerCreatedPlan(self, event):
 def handlerModifiedPlan(self, event):
 
     plant = self.plan_type
+    userid = api.user.get_current().id
 
     if plant == 'plantext':
 
@@ -69,7 +73,8 @@ def handlerModifiedPlan(self, event):
 
         if plantext:
 
-            title_plan = 'foo.tex'
+            # title_plan = 'foo.tex'
+            title_plan = "%s.tex" % (userid)
             mainTex = '% !TEX encoding = UTF-8 Unicode\n'
             mainTex += PLAN_LATEX_TEMPLATE % (plantext,)
             try:
@@ -86,5 +91,17 @@ def handlerModifiedPlan(self, event):
             except:
                 pass
 
-            new_file = open('foo.pdf', "rb")
+            pdfname = "%s.pdf" % (userid)
+            new_file = open(pdfname, "rb")
             self.file = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
+            try:
+                logfile = "%s.log" % (userid)
+                auxfile = "%s.aux" % (userid)
+                os.remove(os.path.join(logfile))  # log file
+                os.remove(os.path.join(auxfile))  # aux file
+                os.remove(os.path.join(pdfname))  # pdf file
+                os.remove(file_path)  # tex file
+            except OSError:
+                pass
+
+

@@ -34,7 +34,7 @@
     </p> -->
 
     <!-- Caja de texto -->
-    <div tal:content="structure view/w/text/render" />
+    <!-- <div tal:content="structure view/w/text/render" /> -->
 
     <!-- <span tal:content="view/hasfile"/> -->
 
