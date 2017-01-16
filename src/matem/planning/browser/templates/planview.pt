@@ -26,6 +26,7 @@
       type="text/javascript"
       tal:attributes="src string:++resource++matem.planning/viewer.js">
     </script>
+
   </metal:js>
 <body>
 
@@ -38,7 +39,9 @@
 
     <!-- <span tal:content="view/hasfile"/> -->
 
-    <tal:block tal:condition="view/hasfile" tal:define="file context/file;">
+    <div id="plan_type" tal:content="context/plan_type" style="display:none;"/>
+
+    <tal:block tal:condition="view/hasfile" tal:define="file view/getFile;">
 
     <br/><br/><br/>
     <div tal:define="content_type file/contentType; filename python:file.filename.split('.')[0]">

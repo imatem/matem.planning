@@ -32,7 +32,7 @@ PLAN_LATEX_TEMPLATE = r"""
 def handlerCreatedPlan(self, event):
 
     plant = self.plan_type
-
+    userid = api.user.get_current().id
 
     if plant == 'plantext':
 
@@ -40,7 +40,8 @@ def handlerCreatedPlan(self, event):
 
         if plantext:
 
-            title_plan = 'foo.tex'
+            # title_plan = 'foo.tex'
+            title_plan = "%s.tex" % (userid)
             mainTex = '% !TEX encoding = UTF-8 Unicode\n'
             mainTex += PLAN_LATEX_TEMPLATE % (plantext,)
             try:
@@ -57,8 +58,18 @@ def handlerCreatedPlan(self, event):
             except:
                 pass
 
-            new_file = open('foo.pdf', "rb")
-            self.file = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
+            pdfname = "%s.pdf" % (userid)
+            new_file = open(pdfname, "rb")
+            self.textfile = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
+            try:
+                logfile = "%s.log" % (userid)
+                auxfile = "%s.aux" % (userid)
+                os.remove(os.path.join(logfile))  # log file
+                os.remove(os.path.join(auxfile))  # aux file
+                os.remove(os.path.join(pdfname))  # pdf file
+                os.remove(file_path)  # tex file
+            except OSError:
+                pass
 
 
 @adapter(IPlan, IObjectModifiedEvent)
@@ -93,7 +104,7 @@ def handlerModifiedPlan(self, event):
 
             pdfname = "%s.pdf" % (userid)
             new_file = open(pdfname, "rb")
-            self.file = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
+            self.textfile = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
             try:
                 logfile = "%s.log" % (userid)
                 auxfile = "%s.aux" % (userid)

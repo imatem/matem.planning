@@ -52,13 +52,25 @@ class IPlan(model.Schema):
                 'hide_values': ('plantext',),
                 'siblings': True,
             },
+            {
+                'name': 'textfile',
+                'action': 'hide',
+                'hide_values': ('plantext', 'planfile'),
+                'siblings': True,
+            },
+
+
         ),
     )
-
 
     form.widget('text', cols=80, rows=20)
     text = schema.Text(
         title=_(u'Text'),
+        required=False,
+    )
+
+    textfile = NamedBlobFile(
+        title=_(u'File'),
         required=False,
     )
 
