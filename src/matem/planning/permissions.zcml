@@ -1,0 +1,16 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:zcml="http://namespaces.zope.org/zcml"
+           i18n_domain="matem.planning">
+  <permission
+    id="matem.planning.AddPlan"
+    title="matem.planning: Add Plan"
+    />
+  <permission
+    id="matem.planning.ModifyPlan"
+    title="matem.planning: Modify Plan"
+    />
+  <permission
+    id="matem.planning.ViewPlan"
+    title="matem.planning: View Plan"
+    />
+</configure>
