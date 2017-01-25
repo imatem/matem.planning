@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="plan_workflow" title="Plan Workflow" description=" - An plan workflow where content is only accessible if you are logged in. - Basic states are: Sended and Private." state_variable="review_state" initial_state="private" manager_bypass="False">
+ <permission>Access contents information</permission>
+ <permission>Change portal events</permission>
+ <permission>Modify portal content</permission>
+ <permission>View</permission>
+ <permission>matem.planning: Add Plan</permission>
+ <permission>matem.planning: Modify Plan</permission>
+ <permission>matem.planning: View Plan</permission>
+ <permission>Modify view template</permission>
+ <permission>Copy or Move</permission>
+ <permission>Delete objects</permission>
+ <state state_id="private" title="Private">
+  <description>Can only be seen and edited by the owner.
+</description>
+  <exit-transition transition_id="submit_send"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Copy or Move" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Delete objects" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify view template" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="matem.planning: Add Plan" acquired="True">
+  </permission-map>
+  <permission-map name="matem.planning: Modify Plan" acquired="True">
+  </permission-map>
+  <permission-map name="matem.planning: View Plan" acquired="True">
+  </permission-map>
+ </state>
+ <state state_id="sended" title="Sended">
+  <description>Visible to owner user, admin, not editable by the owner.</description>
+  <exit-transition transition_id="submit_private"/>
+  <permission-map name="Access contents information" acquired="True">
+  </permission-map>
+  <permission-map name="Change portal events" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Copy or Move" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Delete objects" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="Modify view template" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="True">
+  </permission-map>
+  <permission-map name="matem.planning: Add Plan" acquired="True">
+  </permission-map>
+  <permission-map name="matem.planning: Modify Plan" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
+  <permission-map name="matem.planning: View Plan" acquired="True">
+  </permission-map>
+ </state>
+ <transition transition_id="submit_private" title="Admin makes content private" new_state="private" trigger="USER" before_script="" after_script="">
+  <description>Making an item private means that it will not be visible to anyone but the owner and the site administrator.</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=submit_private" category="workflow" icon="">Make private</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+   <guard-role>Manager</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="submit_send" title="Admin sends content to sended state" new_state="sended" trigger="USER" before_script="" after_script="">
+  <description>Sended the item makes it visible to owner and only admin makes edit.
+</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=submit_send" category="workflow" icon="">Sended</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+   <guard-role>Manager</guard-role>
+  </guard>
+ </transition>
+ <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
+  <description>Previous transition</description>
+  <default>
+
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
+  <description>The ID of the user who performed the last transition
+</description>
+  <default>
+
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True">
+  <description>Comment about the last transition
+</description>
+  <default>
+
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="False">
+  <description>Provides access to workflow history
+</description>
+  <default>
+
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
+  <description>When the previous transition was performed
+</description>
+  <default>
+
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+</dc-workflow>
