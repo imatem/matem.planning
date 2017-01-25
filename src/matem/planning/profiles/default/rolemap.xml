@@ -21,6 +21,18 @@
 
     <!-- permission for cut, copy, paste, rename -->
     <!-- <permission name="Delete objects" acquire="True"></permission> -->
+    <permission name="matem.planning: Add Plan Folder" acquire="True">
+      <role name="Manager"/>
+    </permission>
+    <permission name="matem.planning: Modify Plan Folder" acquire="True">
+      <role name="Manager"/>
+      <role name="Owner"/>
+    </permission>
+    <permission name="matem.planning: View Plan Folder" acquire="True">
+      <role name="Manager"/>
+      <role name="Owner"/>
+    </permission>
+
   </permissions>
 
 </rolemap>

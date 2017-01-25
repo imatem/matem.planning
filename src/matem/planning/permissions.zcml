@@ -13,4 +13,16 @@
     id="matem.planning.ViewPlan"
     title="matem.planning: View Plan"
     />
+  <permission
+    id="matem.planning.AddPlanFolder"
+    title="matem.planning: Add Plan Folder"
+    />
+  <permission
+    id="matem.planning.ModifyPlanFolder"
+    title="matem.planning: Modify Plan Folder"
+    />
+  <permission
+    id="matem.planning.ViewPlanFolder"
+    title="matem.planning: View Plan Folder"
+    />
 </configure>
