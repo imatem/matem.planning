@@ -1,9 +1,14 @@
 <?xml version="1.0"?>
 <object name="portal_workflow" meta_type="Plone Workflow Tool">
   <object name="plan_workflow" meta_type="Workflow"/>
+  <object name="cvfolder_dx_workflow" meta_type="Workflow"/>
+
   <bindings>
     <type type_id="plan">
       <bound-workflow workflow_id="plan_workflow"/>
+    </type>
+    <type type_id="PlanFolder">
+      <bound-workflow workflow_id="cvfolder_dx_workflow"/>
     </type>
   </bindings>
 
