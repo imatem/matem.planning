@@ -12,43 +12,42 @@
   <property
       i18n:translate=""
       name="description"></property>
-
-  <property name="allow_discussion">False</property>
-  <property name="factory">plan</property>
   <property name="icon_expr"></property>
-  <property name="link_target"></property>
-
-  <!-- Hierarchy control -->
-  <property name="allowed_content_types">
-    <!-- <element value="" />-->
-  </property>
-  <property name="filter_content_types">True</property>
+  <property name="factory">plan</property>
   <property name="global_allow">True</property>
+  <property name="filter_content_types">True</property>
+   <!-- Hierarchy control -->
+  <property name="allowed_content_types"></property>
+  <property name="allow_discussion">False</property>
 
-  <!-- Schema, class and security -->
+  <!-- schema, class and security used for content items -->
+  <property name="schema">matem.planning.content.plan.IPlan</property>
+  <property name="klass">plone.dexterity.content.Item</property>
+  <!-- <property name="klass">matem.planning.content.plan.Plan</property> -->
   <!-- <property name="add_permission">cmf.AddPortalContent</property> -->
   <property name="add_permission">matem.planning.AddPlan</property>
-  <property name="klass">plone.dexterity.content.Item</property>
-  <property name="model_file"></property>
-  <property name="model_source"></property>
-  <property name="schema">matem.planning.content.plan.IPlan</property>
+  <!-- <property name="model_file"></property>
+  <property name="model_source"></property> -->
 
   <!-- Enabled behaviors -->
   <property name="behaviors">
     <element value="plone.app.content.interfaces.INameFromTitle" />
+    <element value="plone.versioning" />
   </property>
 
+
   <!-- View information -->
+  <property name="link_target"></property>
   <property name="add_view_expr">string:${folder_url}/++add++plan</property>
   <property name="immediate_view">view</property>
   <property name="default_view">planview</property>
-  <property name="default_view_fallback">False</property>
   <property name="view_methods">
     <element value="view"/>
     <element value="planview" />
     <element value="planview-v1" />
     <element value="planview-v2" />
   </property>
+  <property name="default_view_fallback">False</property>
 
   <!-- Method aliases -->
   <alias
