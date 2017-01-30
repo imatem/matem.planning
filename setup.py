@@ -44,6 +44,7 @@ setup(
         'z3c.jbot',
         'plone.directives.form',
         'plone.app.dexterity',
+        'plone.app.versioningbehavior',
     ],
     extras_require={
         'test': [
