@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="plan_workflow" title="Plan Workflow" description=" - An plan workflow where content is only accessible if you are logged in. - Basic states are: Sended and Private." state_variable="review_state" initial_state="private" manager_bypass="False">
+<dc-workflow workflow_id="plan_workflow" title="Plan Workflow" description=" - An plan workflow where content is only accessible if you are logged in. - Basic states are: Sended and Private." state_variable="review_state" initial_state="private" manager_bypass="False" xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plone">
  <permission>Access contents information</permission>
  <permission>Change portal events</permission>
  <permission>Modify portal content</permission>
@@ -10,9 +10,9 @@
  <permission>Modify view template</permission>
  <permission>Copy or Move</permission>
  <permission>Delete objects</permission>
- <state state_id="private" title="Private">
-  <description>Can only be seen and edited by the owner.
-</description>
+ <state state_id="private" title="Private" i18n:attributes="title">
+  <description i18n:translate="">Can only be seen and edited by the owner.
+  </description>
   <exit-transition transition_id="submit_send"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
@@ -53,8 +53,8 @@
   <permission-map name="matem.planning: View Plan" acquired="True">
   </permission-map>
  </state>
- <state state_id="sended" title="Sended">
-  <description>Visible to owner user, admin, not editable by the owner.</description>
+ <state state_id="sended" title="Sended" i18n:attributes="title">
+  <description i18n:translate="">Visible to owner user, admin, not editable by the owner.</description>
   <exit-transition transition_id="submit_private"/>
   <permission-map name="Access contents information" acquired="True">
   </permission-map>
@@ -89,7 +89,7 @@
   <permission-map name="matem.planning: View Plan" acquired="True">
   </permission-map>
  </state>
- <transition transition_id="submit_private" title="Admin makes content private" new_state="private" trigger="USER" before_script="" after_script="">
+ <transition transition_id="submit_private" title="Admin makes content private" new_state="private" trigger="USER" before_script="" after_script="" i18n:translate="">
   <description>Making an item private means that it will not be visible to anyone but the owner and the site administrator.</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=submit_private" category="workflow" icon="">Make private</action>
   <guard>
@@ -97,10 +97,10 @@
    <guard-role>Manager</guard-role>
   </guard>
  </transition>
- <transition transition_id="submit_send" title="Admin sends content to sended state" new_state="sended" trigger="USER" before_script="" after_script="">
-  <description>Sended the item makes it visible to owner and only admin makes edit.
+ <transition transition_id="submit_send" title="Admin sends content to sended state" new_state="sended" trigger="USER" before_script="" after_script="" i18n:translate="">
+  <description i18n:translate="">Sended the item makes it visible to owner and only admin makes edit.
 </description>
-  <action url="%(content_url)s/content_status_modify?workflow_action=submit_send" category="workflow" icon="">Sended</action>
+  <action url="%(content_url)s/content_status_modify?workflow_action=submit_send" category="workflow" icon="" i18n:translate="">Sended</action>
   <guard>
    <guard-permission>Review portal content</guard-permission>
    <guard-role>Manager</guard-role>

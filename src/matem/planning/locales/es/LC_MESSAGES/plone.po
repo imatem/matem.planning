@@ -1,0 +1,61 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2017-01-30 22:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: matem/planning/profiles/default/workflows/cvfolder_dx_workflow/definition.xml
+#: matem/planning/profiles/default/workflows/plan_workflow/definition.xml
+msgid "Can only be seen and edited by the owner."
+msgstr "Puede sólo ser visto y editado por el propietario."
+
+#: matem/planning/profiles/default/workflows/cvfolder_dx_workflow/definition.xml
+msgid "Editable"
+msgstr "Editable"
+
+#: matem/planning/profiles/default/workflows/cvfolder_dx_workflow/definition.xml
+msgid "Make editable"
+msgstr "Hacer Editable"
+
+#: matem/planning/profiles/default/workflows/cvfolder_dx_workflow/definition.xml
+msgid "Make not Editable"
+msgstr "Hacer no Editable"
+
+#: matem/planning/profiles/default/workflows/cvfolder_dx_workflow/definition.xml
+msgid "Making an item editable means that it will not be visible to anyone but the owner and the site administrator."
+msgstr "Hacer un item editable significa que este no será visible por nadie salvo el propietario y el administrador del sitio."
+
+#: matem/planning/profiles/default/workflows/cvfolder_dx_workflow/definition.xml
+msgid "Not Editable"
+msgstr "No Editable"
+
+#: matem/planning/profiles/default/workflows/cvfolder_dx_workflow/definition.xml
+msgid "Not Editable the item makes it visible to owner and only admin makes edit."
+msgstr "Hacer un item No Editable significa que este es visible por el propietario y sólo admin puede editar"
+
+#: matem/planning/profiles/default/workflows/plan_workflow/definition.xml
+msgid "Private"
+msgstr "Privado"
+
+#: matem/planning/profiles/default/workflows/plan_workflow/definition.xml
+msgid "Sended"
+msgstr "Enviado"
+
+#: matem/planning/profiles/default/workflows/plan_workflow/definition.xml
+msgid "Sended the item makes it visible to owner and only admin makes edit."
+msgstr "Cambiar un elemento a enviado lo hace visible para el propietario y sólo editable para el administrador."
+
+#: matem/planning/profiles/default/workflows/cvfolder_dx_workflow/definition.xml
+#: matem/planning/profiles/default/workflows/plan_workflow/definition.xml
+msgid "Visible to owner user, admin, not editable by the owner."
+msgstr "Visible por el propietario, admin y no editable por el propietario."

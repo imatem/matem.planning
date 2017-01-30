@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="cvfolder_dx_workflow" title="CV Folder Dexterrity Workflow" description=" - A cv folder dexterity workflow where content is only accessible for the owner logged in. - Basic states are: Editable and not Editable." state_variable="review_state" initial_state="editable" manager_bypass="False">
+<dc-workflow workflow_id="cvfolder_dx_workflow" title="CV Folder Dexterrity Workflow" description=" - A cv folder dexterity workflow where content is only accessible for the owner logged in. - Basic states are: Editable and not Editable." state_variable="review_state" initial_state="editable" manager_bypass="False" xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plone">
  <permission>Access contents information</permission>
  <permission>Change portal events</permission>
  <permission>Copy or Move</permission>
@@ -13,8 +13,8 @@
  <permission>Add portal content</permission>
  <permission>eea.facetednavigation: Configure faceted</permission>
  <permission>List folder contents</permission>
- <state state_id="editable" title="Editable">
-  <description>Can only be seen and edited by the owner.</description>
+ <state state_id="editable" title="Editable" i18n:attributes="title">
+  <description i18n:translate="">Can only be seen and edited by the owner.</description>
   <exit-transition transition_id="submit_noteditable"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
@@ -64,8 +64,8 @@
   <permission-map name="matem.planning: View Plan Folder" acquired="True">
   </permission-map>
  </state>
- <state state_id="noteditable" title="Not Editable">
-  <description>Visible to owner user, admin, not editable by the owner.</description>
+ <state state_id="noteditable" title="Not Editable" i18n:attributes="title">
+  <description i18n:translate="">Visible to owner user, admin, not editable by the owner.</description>
   <exit-transition transition_id="submit_editable"/>
   <permission-map name="Access contents information" acquired="True">
   </permission-map>
@@ -110,17 +110,17 @@
   <permission-map name="matem.planning: View Plan Folder" acquired="True">
   </permission-map>
  </state>
- <transition transition_id="submit_editable" title="Admin makes content editable" new_state="editable" trigger="USER" before_script="" after_script="">
-  <description>Making an item editable means that it will not be visible to anyone but the owner and the site administrator.</description>
-  <action url="%(content_url)s/content_status_modify?workflow_action=submit_editable" category="workflow" icon="">Make editable</action>
+ <transition transition_id="submit_editable" title="Admin makes content editable" new_state="editable" trigger="USER" before_script="" after_script="" i18n:translate="">
+  <description i18n:translate="">Making an item editable means that it will not be visible to anyone but the owner and the site administrator.</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=submit_editable" category="workflow" icon="" i18n:translate="">Make editable</action>
   <guard>
    <guard-permission>Review portal content</guard-permission>
    <guard-role>Manager</guard-role>
   </guard>
  </transition>
- <transition transition_id="submit_noteditable" title="Admin sends content to not editable state" new_state="noteditable" trigger="USER" before_script="" after_script="">
-  <description>Not Editable the item makes it visible to owner and only admin makes edit.</description>
-  <action url="%(content_url)s/content_status_modify?workflow_action=submit_noteditable" category="workflow" icon="">Make not Editable</action>
+ <transition transition_id="submit_noteditable" title="Admin sends content to not editable state" new_state="noteditable" trigger="USER" before_script="" after_script="" i18n:translate="">
+  <description i18n:translate="">Not Editable the item makes it visible to owner and only admin makes edit.</description>
+  <action url="%(content_url)s/content_status_modify?workflow_action=submit_noteditable" category="workflow" icon="" i18n:translate="">Make not Editable</action>
   <guard>
    <guard-permission>Review portal content</guard-permission>
    <guard-role>Manager</guard-role>

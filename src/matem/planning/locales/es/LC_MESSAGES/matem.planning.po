@@ -12,52 +12,52 @@ msgstr ""
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: plone\n"
+"Domain: DOMAIN\n"
 
 #: matem/planning/content/plan.py:21
 msgid "By File"
-msgstr ""
+msgstr "Por Archivo"
 
 #: matem/planning/content/plan.py:20
 msgid "By Text"
-msgstr ""
+msgstr "Por Texto"
 
 #: matem/planning/profiles/default/types/plan.xml
 msgid "Content for annual plans"
-msgstr ""
+msgstr "Contenido para los planes anuales"
 
 #: matem/planning/content/interfaces.py:17
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #: matem/planning/content/plan.py:73
 msgid "File"
-msgstr ""
+msgstr "Archivo"
 
 #: matem/planning/configure.zcml:22
 msgid "Installs the matem.planning add-on."
-msgstr ""
+msgstr "Instalar el complemento matem.planning"
 
 #: matem/planning/profiles/default/types/plan.xml
 msgid "Plan"
-msgstr ""
+msgstr "Plan"
 
 #: matem/planning/profiles/default/types/planfolder.xml
 msgid "PlanFolder"
-msgstr ""
+msgstr "PlanFolder"
 
 #: matem/planning/content/plan.py:68
 msgid "Text"
-msgstr ""
+msgstr "Texto"
 
 #: matem/planning/content/interfaces.py:12
 #: matem/planning/content/plan.py:33
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 #: matem/planning/configure.zcml:31
 msgid "Uninstalls the matem.planning add-on."
-msgstr ""
+msgstr "Desinstalar el complemento de matem.planning"
 
 #: plone/app/versioningbehavior/behaviors.py:25
 msgid "help_change_note"
@@ -70,7 +70,7 @@ msgstr ""
 #. Default: "Plan type"
 #: matem/planning/content/plan.py:38
 msgid "label_plan_type"
-msgstr ""
+msgstr "Tipo de Plan"
 
 #: matem/planning/configure.zcml:22
 msgid "matem.planning"

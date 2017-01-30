@@ -11,7 +11,7 @@
       name="title">Plan</property>
   <property
       i18n:translate=""
-      name="description"></property>
+      name="description">Content for annual plans</property>
   <property name="icon_expr"></property>
   <property name="factory">plan</property>
   <property name="global_allow">True</property>
@@ -68,12 +68,13 @@
   />
 
   <!-- Actions -->
+  <!-- i18n:attributes="title description" -->
+  <!-- i18n:attributes="title description" -->
   <action
       action_id="view"
       category="object"
       condition_expr=""
       description=""
-      i18n:attributes="title description"
       title="View"
       url_expr="string:${object_url}/"
       visible="True">
@@ -84,7 +85,6 @@
       category="object"
       condition_expr=""
       description=""
-      i18n:attributes="title description"
       title="Edit"
       url_expr="string:${object_url}/edit"
       visible="True">
