@@ -9,4 +9,11 @@ class PlanFolder(Container):
     """Class for plans"""
 
     def summary(self):
-        return []
+        annualreport = 0
+        withoutfinal = 0
+        contents = self.contentValues()
+        return {
+            'total': len(contents),
+            'annualreport': annualreport,
+            'withoutfinal': withoutfinal
+        }
