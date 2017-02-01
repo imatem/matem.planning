@@ -50,4 +50,11 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      name="planning"
+      for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+      class=".migration.MigrationForm"
+      permission="zope2.View"
+      />
+
 </configure>
