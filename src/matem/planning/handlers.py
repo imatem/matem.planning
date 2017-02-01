@@ -220,7 +220,6 @@ def handlerModifiedPlan(self, event):
                 # fileTex = unicode(mainTex, "utf-8", errors="ignore")
                 fileTex = mainTex.encode('utf-8', 'ignore')
                 tempdir = tempfile.mkdtemp()
-                import pdb; pdb.set_trace()
                 file_path = os.path.join(tempdir, title_plan)
                 file_os = open(file_path, 'wb')
                 file_os.write(fileTex)
