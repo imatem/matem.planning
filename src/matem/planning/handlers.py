@@ -141,23 +141,21 @@ def handlerCreatedPlan(self, event):
             try:
                 # fileTex = unicode(mainTex, "utf-8", errors="ignore")
                 fileTex = mainTex.encode('utf-8', 'ignore')
-
-                file_path = os.path.join(tempfile.mkdtemp(), title_plan)
+                tempdir = tempfile.mkdtemp()
+                file_path = os.path.join(tempdir, title_plan)
                 file_os = open(file_path, 'wb')
                 file_os.write(fileTex)
                 file_os.close()
-
-                pdf_file = os.system("pdflatex -interaction=nonstopmode %s"% (file_path))
-
+                os.system("cd {0}; pdflatex -interaction=nonstopmode {1}".format(tempdir, file_path))
             except:
                 pass
 
-            pdfname = "%s.pdf" % (userid)
+            pdfname = file_path.replace('.tex', '.pdf')
             new_file = open(pdfname, "rb")
             self.textfile = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
             try:
-                logfile = "%s.log" % (userid)
-                auxfile = "%s.aux" % (userid)
+                logfile = file_path.replace('.tex', '.log')
+                auxfile = file_path.replace('.tex', '.aux')
                 os.remove(os.path.join(logfile))  # log file
                 os.remove(os.path.join(auxfile))  # aux file
                 os.remove(os.path.join(pdfname))  # pdf file
@@ -221,22 +219,22 @@ def handlerModifiedPlan(self, event):
             try:
                 # fileTex = unicode(mainTex, "utf-8", errors="ignore")
                 fileTex = mainTex.encode('utf-8', 'ignore')
-                file_path = os.path.join(tempfile.mkdtemp(), title_plan)
+                tempdir = tempfile.mkdtemp()
+                import pdb; pdb.set_trace()
+                file_path = os.path.join(tempdir, title_plan)
                 file_os = open(file_path, 'wb')
                 file_os.write(fileTex)
                 file_os.close()
-
-                pdf_file = os.system("pdflatex -interaction=nonstopmode %s"% (file_path))
-
+                os.system("cd {0}; pdflatex -interaction=nonstopmode {1}".format(tempdir, file_path))
             except:
                 pass
 
-            pdfname = "%s.pdf" % (userid)
+            pdfname = file_path.replace('.tex', '.pdf')
             new_file = open(pdfname, "rb")
             self.textfile = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
             try:
-                logfile = "%s.log" % (userid)
-                auxfile = "%s.aux" % (userid)
+                logfile = file_path.replace('.tex', '.log')
+                auxfile = file_path.replace('.tex', '.aux')
                 os.remove(os.path.join(logfile))  # log file
                 os.remove(os.path.join(auxfile))  # aux file
                 os.remove(os.path.join(pdfname))  # pdf file
