@@ -25,7 +25,7 @@ class MigrationForm(form.Form):
             for plan in folder.getObject().getFolderContents():
                 userid = plan.id
                 # if userid not in ['natig', 'dolivero', 'aortiz', 'gruiz', 'pablo', 'rolando',]:
-                if userid not in ['natig', 'dolivero', 'aortiz', 'gruiz', 'pablo']:
+                if userid not in ['rolando', ] or year == '2012':
                     continue
                 planfolder = self.getplanfolder(userid)
                 logger.info('Plan Folder {0}'.format(planfolder))
