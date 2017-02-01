@@ -19,10 +19,8 @@
     <element value="view"/>
   </property>
   <property name="default_view_fallback">False</property>
-  <!-- <property name="add_permission">cmf.AddPortalContent</property> -->
   <property name="add_permission">matem.planning.AddPlanFolder</property>
   <property name="klass">matem.planning.content.planFolder.PlanFolder</property>
-  <!-- <property name="klass">plone.dexterity.content.Container</property> -->
   <property name="behaviors">
     <element value="plone.app.content.interfaces.INameFromTitle"/>
   </property>
