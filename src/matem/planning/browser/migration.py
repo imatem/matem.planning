@@ -28,6 +28,7 @@ class MigrationForm(form.Form):
                 if userid not in ['natig', 'dolivero', 'aortiz', 'gruiz', 'pablo']:
                     continue
                 planfolder = self.getplanfolder(userid)
+                logger.info('Plan Folder {0}'.format(planfolder))
                 obj = api.content.create(
                     type='plan',
                     title='Plan de trabajo {0}'.format(year),
