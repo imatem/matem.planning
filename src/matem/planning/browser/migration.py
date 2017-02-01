@@ -19,12 +19,13 @@ class MigrationForm(form.Form):
         logger.info('moving plans ...')
         plans_path = '/acerca-de/estructura-interna/secretaria-academica/informes/planes'
         plans = api.content.get(path=plans_path)
+        transforms = api.portal.get_tool('portal_transforms')
         for folder in plans.getFolderContents():
             year = folder.id
             for plan in folder.getObject().getFolderContents():
                 userid = plan.id
-                # if userid not in ['natig', 'rolando', 'dolivero', 'aortiz', 'gruiz', 'plabo']:
-                if userid not in ['dolivero']:
+                # if userid not in ['natig', 'dolivero', 'aortiz', 'gruiz', 'pablo', 'rolando',]:
+                if userid not in ['natig', 'dolivero', 'aortiz', 'gruiz', 'pablo']:
                     continue
                 planfolder = self.getplanfolder(userid)
                 obj = api.content.create(
@@ -32,8 +33,9 @@ class MigrationForm(form.Form):
                     title='Plan de trabajo {0}'.format(year),
                     container=planfolder,
                     id=year)
-                text = plan.getObject().getText()
-                obj.text = text.decode('utf-8')
+                text = plan.getObject().getText().decode('utf-8')
+                stream = transforms.convertTo('text/plain', text, mimetype='text/html')
+                obj.text = stream.getData().strip()
                 obj.reindexObject()
                 notify(ObjectModifiedEvent(obj))
                 logger.info('{0}-{1}'.format(plan.id, folder.id))
