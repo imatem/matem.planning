@@ -32,7 +32,8 @@
   <!-- Enabled behaviors -->
   <property name="behaviors">
     <element value="plone.app.content.interfaces.INameFromTitle" />
-    <element value="plone.versioning" />
+    <!-- <element value="plone.versioning" /> -->
+    <element value="plone.app.versioningbehavior.behaviors.IVersionable" />
   </property>
 
 
