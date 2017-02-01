@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
+
+from matem.planning.content.plan import IPlan
+from plone import api
+from plone import namedfile
+# from plone.namedfile.field import NamedBlobFile
+from Products.CMFCore.utils import getToolByName
 from zope.component import adapter
+from zope.component.hooks import getSite
 from zope.lifecycleevent.interfaces import IObjectCreatedEvent
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
-from matem.planning.content.plan import IPlan
-import os
-from plone import namedfile
-# from plone.namedfile.field import NamedBlobFile
 
-from plone import api
-from Products.CMFCore.utils import getToolByName
-from zope.component.hooks import getSite
+import os
+import tempfile
+
 
 PLAN_LATEX_TEMPLATE = r"""
     \documentclass[11pt, letterpaper]{article}
@@ -61,7 +64,7 @@ PLAN_LATEX_TEMPLATE = r"""
            { \Large\bfseries\upshape\@author}
            {\Large\mdseries\upshape ~|~\@title}\\
            {\normalsize\mdseries\upshape\@institution \smallskip\\}
-           
+
            {\phonesymbol\@phone\ \rmfamily\textbullet\ \emailsymbol\@email}
      }\\[4.5em]}
 
@@ -139,7 +142,7 @@ def handlerCreatedPlan(self, event):
                 # fileTex = unicode(mainTex, "utf-8", errors="ignore")
                 fileTex = mainTex.encode('utf-8', 'ignore')
 
-                file_path = os.path.join(title_plan)
+                file_path = os.path.join(tempfile.mkdtemp(), title_plan)
                 file_os = open(file_path, 'wb')
                 file_os.write(fileTex)
                 file_os.close()
@@ -218,8 +221,7 @@ def handlerModifiedPlan(self, event):
             try:
                 # fileTex = unicode(mainTex, "utf-8", errors="ignore")
                 fileTex = mainTex.encode('utf-8', 'ignore')
-
-                file_path = os.path.join(title_plan)
+                file_path = os.path.join(tempfile.mkdtemp(), title_plan)
                 file_os = open(file_path, 'wb')
                 file_os.write(fileTex)
                 file_os.close()
@@ -241,5 +243,3 @@ def handlerModifiedPlan(self, event):
                 os.remove(file_path)  # tex file
             except OSError:
                 pass
-
-
