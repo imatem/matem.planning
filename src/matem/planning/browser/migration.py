@@ -24,8 +24,8 @@ class MigrationForm(form.Form):
             year = folder.id
             for plan in folder.getObject().getFolderContents():
                 userid = plan.id
-                # if userid not in ['natig', 'dolivero', 'aortiz', 'gruiz', 'pablo', 'rolando',]:
-                if userid not in ['rolando', ] or year == '2012':
+                if userid in ['natig', 'dolivero', 'aortiz', 'gruiz', 'pablo', 'rolando', 'maperez']:
+                # if userid not in ['rolando', ]:
                     continue
                 planfolder = self.getplanfolder(userid)
                 logger.info('Plan Folder {0}'.format(planfolder))
@@ -34,9 +34,12 @@ class MigrationForm(form.Form):
                     title='Plan de trabajo {0}'.format(year),
                     container=planfolder,
                     id=year)
-                text = plan.getObject().getText().decode('utf-8')
-                stream = transforms.convertTo('text/plain', text, mimetype='text/html')
-                obj.text = stream.getData().strip()
+                text = plan.getObject().getText().decode('utf-8', 'ignore')
+                try:
+                    stream = transforms.convertTo('text/plain', plan.getObject().getText(), mimetype='text/html')
+                except UnicodeDecodeError:
+                    stream = transforms.convertTo('text/plain', text, mimetype='text/html')
+                obj.text = stream.getData().strip().decode('utf-8', 'ignore')
                 obj.reindexObject()
                 notify(ObjectModifiedEvent(obj))
                 logger.info('{0}-{1}'.format(plan.id, folder.id))

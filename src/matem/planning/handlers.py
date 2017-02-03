@@ -23,6 +23,8 @@ PLAN_LATEX_TEMPLATE = r"""
     \usepackage{graphicx}
     \usepackage{latexsym}
     \usepackage{amsmath}
+    \usepackage[T1]{fontenc}
+    \DeclareUnicodeCharacter{00A0}{ }
 
     \usepackage{color}
     \usepackage{tikz}
