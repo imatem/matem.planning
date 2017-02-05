@@ -25,7 +25,7 @@ class MigrationForm(form.Form):
             for plan in folder.getObject().getFolderContents():
                 userid = plan.id
                 if userid in ['natig', 'dolivero', 'aortiz', 'gruiz', 'pablo', 'rolando', 'maperez']:
-                # if userid not in ['rolando', ]:
+                    # if userid not in ['rolando', ]:
                     continue
                 planfolder = self.getplanfolder(userid)
                 logger.info('Plan Folder {0}'.format(planfolder))
@@ -42,6 +42,7 @@ class MigrationForm(form.Form):
                 obj.text = stream.getData().strip().decode('utf-8', 'ignore')
                 obj.reindexObject()
                 notify(ObjectModifiedEvent(obj))
+                api.content.transition(obj=obj, transition='submit_send')
                 logger.info('{0}-{1}'.format(plan.id, folder.id))
 
     def getplanfolder(self, id):
@@ -53,6 +54,7 @@ class MigrationForm(form.Form):
                 title='Planes de Trabajo',
                 container=cvfolder,
                 id='planes')
+            api.content.transition(obj=obj, transition='submit_noteditable')
         else:
             obj = cvfolder['planes']
         return obj
