@@ -8,6 +8,7 @@ from Products.CMFCore.utils import getToolByName
 from zope.component import adapter
 from zope.component.hooks import getSite
 from zope.lifecycleevent.interfaces import IObjectCreatedEvent
+from zope.lifecycleevent.interfaces import IObjectAddedEvent
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
 
@@ -89,14 +90,15 @@ PLAN_LATEX_TEMPLATE = r"""
 """
 
 
-@adapter(IPlan, IObjectCreatedEvent)
+@adapter(IPlan, IObjectAddedEvent)
 def handlerCreatedPlan(self, event):
 
     plant = self.plan_type
-    userid = api.user.get_current().id
+    # userid = api.user.get_current().id
+    # import pdb; pdb.set_trace()
     # Be carefull with this
     # if userid == 'admin':
-    #     userid = self.Login()
+    userid = self.Login()
 
     if plant == 'plantext':
 
@@ -106,7 +108,6 @@ def handlerCreatedPlan(self, event):
 
             tex_title = self.title
             tex_author = ""
-            # tex_institution = "Instituto de Matemáticas, Universidad Nacional Autónoma de México".decode('utf-8')
             tex_institution = "IM - UNAM"
             tex_phone = ""
             tex_email = ""
