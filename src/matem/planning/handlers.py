@@ -13,6 +13,7 @@ from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
 import os
 import tempfile
+import shutil
 
 
 PLAN_LATEX_TEMPLATE = r"""
@@ -156,13 +157,8 @@ def handlerCreatedPlan(self, event):
             new_file = open(pdfname, "rb")
             self.textfile = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
             try:
-                logfile = file_path.replace('.tex', '.log')
-                auxfile = file_path.replace('.tex', '.aux')
-                os.remove(os.path.join(logfile))  # log file
-                os.remove(os.path.join(auxfile))  # aux file
-                os.remove(os.path.join(pdfname))  # pdf file
-                os.remove(file_path)  # tex file
-            except OSError:
+                shutil.rmtree(tempdir)  # remove tempdir
+            except:
                 pass
 
 
@@ -233,12 +229,8 @@ def handlerModifiedPlan(self, event):
             pdfname = file_path.replace('.tex', '.pdf')
             new_file = open(pdfname, "rb")
             self.textfile = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
+
             try:
-                logfile = file_path.replace('.tex', '.log')
-                auxfile = file_path.replace('.tex', '.aux')
-                os.remove(os.path.join(logfile))  # log file
-                os.remove(os.path.join(auxfile))  # aux file
-                os.remove(os.path.join(pdfname))  # pdf file
-                os.remove(file_path)  # tex file
-            except OSError:
+                shutil.rmtree(tempdir)  # remove tempdir
+            except:
                 pass
