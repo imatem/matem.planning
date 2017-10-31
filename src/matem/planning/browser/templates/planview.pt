@@ -6,6 +6,13 @@
   <metal:css fill-slot="style_slot" tal:define="custom_stylesheet view/custom_stylesheet|nothing">
    <link rel="stylesheet" type="text/css"
     tal:attributes="href string:++resource++matem.planning/viewer.css" />
+
+    <style type="text/css">
+         /* This CSS is used for the Show/Hide functionality. */
+        #viewlet-below-content-title{
+            display: none;
+        }
+      </style>
   </metal:css>
 
 
