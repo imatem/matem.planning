@@ -161,6 +161,9 @@ def handlerCreatedPlan(self, event):
             except:
                 pass
 
+        else:
+            self.textfile = None
+
 
 @adapter(IPlan, IObjectModifiedEvent)
 def handlerModifiedPlan(self, event):
@@ -173,7 +176,8 @@ def handlerModifiedPlan(self, event):
 
     if plant == 'plantext':
 
-        plantext = self.text
+        # plantext = self.text
+        plantext = self.REQUEST.get('form.widgets.text', '')
 
         if plantext:
 
@@ -234,3 +238,5 @@ def handlerModifiedPlan(self, event):
                 shutil.rmtree(tempdir)  # remove tempdir
             except:
                 pass
+        else:
+            self.textfile = None
