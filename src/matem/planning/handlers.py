@@ -164,6 +164,7 @@ def handlerCreatedPlan(self, event):
 
         else:
             self.textfile = None
+            self.text = ''
 
 
 @adapter(IPlan, IObjectModifiedEvent)
@@ -241,3 +242,4 @@ def handlerModifiedPlan(self, event):
                 pass
         else:
             self.textfile = None
+            self.text = ''
