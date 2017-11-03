@@ -119,6 +119,10 @@ class IPlan(model.Schema):
     form.widget('text', cols=80, rows=20)
     text = schema.Text(
         title=_(u'Text'),
+        description=_(
+            u'label_help_text',
+            u'You can use article latex format and the packages included are: latexsym and amsmath'
+        ),
         required=False,
         defaultFactory=defaultPlanText,
     )
