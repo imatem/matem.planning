@@ -9,8 +9,8 @@
 
     <style type="text/css">
          /* This CSS is used for the Show/Hide functionality. */
-        #viewlet-below-content-title{
-            display: none;
+        .documentAuthor{
+          display: none;
         }
       </style>
   </metal:css>
