@@ -8,3 +8,5 @@ def isValidFileType(value):
     if value:
         if value.contentType != 'application/pdf':
             raise Invalid(_(u'Invalid Type File: please correct it, only accept pdf file'))
+
+    return True
