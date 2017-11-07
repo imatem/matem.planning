@@ -21,6 +21,8 @@ from DateTime import DateTime
 from zope.i18n import translate
 
 
+from matem.planning.validators import isValidFileType
+
 def PlanTypesVocabulary(context):
     items = [
         (_(u'By Text'), 'plantext'),
@@ -135,4 +137,5 @@ class IPlan(model.Schema):
     file = NamedBlobFile(
         title=_(u'File'),
         required=False,
+        constraint=isValidFileType,
     )
