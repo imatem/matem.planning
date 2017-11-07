@@ -98,7 +98,11 @@ def handlerCreatedPlan(self, event):
     # import pdb; pdb.set_trace()
     # Be carefull with this
     # if userid == 'admin':
-    userid = self.Login()
+    try:
+        userid = self.Login()
+    except Exception:
+        userid = self.id
+
 
     if plant == 'plantext':
 
@@ -170,11 +174,18 @@ def handlerCreatedPlan(self, event):
 @adapter(IPlan, IObjectModifiedEvent)
 def handlerModifiedPlan(self, event):
 
+    if self.REQUEST.get('orig_template', '') == 'folder_contents':
+        return
+
     plant = self.plan_type
     userid = api.user.get_current().id
     # Be carefull with this
     if userid == 'admin':
-        userid = self.Login()
+        # userid = self.Login()
+        try:
+            userid = self.Login()
+        except Exception:
+            userid = self.id
 
     if plant == 'plantext':
 
