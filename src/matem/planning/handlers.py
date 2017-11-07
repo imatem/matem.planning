@@ -243,3 +243,7 @@ def handlerModifiedPlan(self, event):
         else:
             self.textfile = None
             self.text = ''
+    else:
+
+        self.textfile = None
+        self.text = ''
