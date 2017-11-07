@@ -12,6 +12,13 @@
         .documentAuthor{
           display: none;
         }
+        .mybutton{
+          padding: 3px 12px;
+          border-radius: 3px;
+          background-color: #e6e6e6;
+          cursor: pointer;
+          text-align: center;"
+        }
       </style>
   </metal:css>
 
@@ -45,6 +52,11 @@
     <!-- <div tal:content="structure view/w/text/render" /> -->
 
     <!-- <span tal:content="view/hasfile"/> -->
+
+    <a href="#" class="mybutton"
+      tal:attributes="href python:context.aq_parent.aq_parent.absolute_url();">
+      Ir a <span tal:content="python: context.aq_parent.aq_parent.Title()"/>
+    </a>
 
     <div id="plan_type" tal:content="context/plan_type" style="display:none;"/>
 
@@ -272,7 +284,7 @@
 
         <div id="viewerContainer" tabindex="0">
           <div id="viewer" class="pdfViewer">
-            kjfsdkjfklsjd
+
           </div>
         </div>
 
