@@ -14,6 +14,14 @@ from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.interface import directlyProvides
 
+from zope.interface import provider
+from zope.schema.interfaces import IContextAwareDefaultFactory
+from Products.CMFCore.utils import getToolByName
+from DateTime import DateTime
+from zope.i18n import translate
+
+
+from matem.planning.validators import isValidFileType
 
 def PlanTypesVocabulary(context):
     items = [
@@ -24,6 +32,53 @@ def PlanTypesVocabulary(context):
     items = [SimpleTerm(i[1], i[1], i[0]) for i in items]
     return SimpleVocabulary(items)
 directlyProvides(PlanTypesVocabulary, IVocabularyFactory)
+
+
+@provider(IContextAwareDefaultFactory)
+def defaultPlanText(context):
+    ''' generateWorkPlan from repordsend.py '''
+    id = context.Login()
+    pcatalog = getToolByName(context, 'portal_catalog')
+    userl = pcatalog(portal_type='FSDPerson', id=id)
+    if userl:
+        if 'Investigadores' not in userl[0].getClassificationNames:
+            return ''
+
+    now = DateTime()
+    projects = pcatalog(
+        portal_type='CVProject',
+        participantInProject=[id],
+        fecha_termino={"query": [now, ], "range": "min"},
+    )
+
+    plan = []
+    for p in projects:
+        obj = p.getObject()
+        colaboradores = obj.getInternalCollaborators()
+        if obj.getInternalResponsible() and (id == obj.getInternalResponsible().id):
+            role = 'responsable'
+        elif id in [idss.id for idss in colaboradores]:
+            role = 'colaborador'
+        else:
+            role = 'corresponsable'
+        ptype = translate(obj.getProjectType(), 'UNAM.imateCVct', target_language='es')
+        title = obj.Title()
+        topics = pcatalog(portal_type='FSDSpecialty', id=[topic.id for topic in obj.getResearchTopics()])
+        topics = [unicode(t.Title, 'utf-8') for t in topics]
+        sponsor = translate(obj.getSponsor(), 'UNAM.imateCVct', target_language='es')
+        pnumber = obj.getProjectNumber()
+        c1 = u"Trabajar como %s en un proyecto de %s" % (role, ptype)
+        if pnumber:
+            c11 = u"con número %s, llamado %s " %(pnumber, unicode(title, 'utf-8'))
+        else:
+            c11 = u"llamado %s" %(unicode(title, 'utf-8'))
+        c2 = u"dentro de la(s) línea(s) de investigación: %s." % ' '.join(topics)
+        # c3 = u""  # TODO: faltan colaboradores
+        c4 = u"Este proyecto es patrocinado por: %s.\n" % sponsor
+        c5 = u"Objetivo del proyecto: %s" % unicode(obj.getAim(), 'utf-8')
+        plan.append(u' '.join((c1, c11, c2, c4, c5)))
+    return '\n\n'.join(plan)
+
 
 
 class IPlan(model.Schema):
@@ -66,7 +121,12 @@ class IPlan(model.Schema):
     form.widget('text', cols=80, rows=20)
     text = schema.Text(
         title=_(u'Text'),
+        description=_(
+            u'label_help_text',
+            u'You can use article latex format and the packages included are: latexsym and amsmath'
+        ),
         required=False,
+        defaultFactory=defaultPlanText,
     )
 
     textfile = NamedBlobFile(
@@ -77,4 +137,5 @@ class IPlan(model.Schema):
     file = NamedBlobFile(
         title=_(u'File'),
         required=False,
+        constraint=isValidFileType,
     )

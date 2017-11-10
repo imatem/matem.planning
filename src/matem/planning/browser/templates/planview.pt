@@ -6,6 +6,20 @@
   <metal:css fill-slot="style_slot" tal:define="custom_stylesheet view/custom_stylesheet|nothing">
    <link rel="stylesheet" type="text/css"
     tal:attributes="href string:++resource++matem.planning/viewer.css" />
+
+    <style type="text/css">
+         /* This CSS is used for the Show/Hide functionality. */
+        .documentAuthor{
+          display: none;
+        }
+        .mybutton{
+          padding: 3px 12px;
+          border-radius: 3px;
+          background-color: #e6e6e6;
+          cursor: pointer;
+          text-align: center;"
+        }
+      </style>
   </metal:css>
 
 
@@ -38,6 +52,11 @@
     <!-- <div tal:content="structure view/w/text/render" /> -->
 
     <!-- <span tal:content="view/hasfile"/> -->
+    <br/>
+    <a href="#" class="mybutton"
+      tal:attributes="href python:context.aq_parent.aq_parent.absolute_url();">
+      Ir a <span tal:content="python: context.aq_parent.aq_parent.Title()"/>
+    </a>
 
     <div id="plan_type" tal:content="context/plan_type" style="display:none;"/>
 
@@ -265,7 +284,7 @@
 
         <div id="viewerContainer" tabindex="0">
           <div id="viewer" class="pdfViewer">
-            kjfsdkjfklsjd
+
           </div>
         </div>
 

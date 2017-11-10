@@ -8,11 +8,13 @@ from Products.CMFCore.utils import getToolByName
 from zope.component import adapter
 from zope.component.hooks import getSite
 from zope.lifecycleevent.interfaces import IObjectCreatedEvent
+from zope.lifecycleevent.interfaces import IObjectAddedEvent
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
 
 import os
 import tempfile
+import shutil
 
 
 PLAN_LATEX_TEMPLATE = r"""
@@ -88,14 +90,19 @@ PLAN_LATEX_TEMPLATE = r"""
 """
 
 
-@adapter(IPlan, IObjectCreatedEvent)
+@adapter(IPlan, IObjectAddedEvent)
 def handlerCreatedPlan(self, event):
 
     plant = self.plan_type
-    userid = api.user.get_current().id
+    # userid = api.user.get_current().id
+    # import pdb; pdb.set_trace()
     # Be carefull with this
     # if userid == 'admin':
-    #     userid = self.Login()
+    try:
+        userid = self.Login()
+    except Exception:
+        userid = self.id
+
 
     if plant == 'plantext':
 
@@ -105,7 +112,6 @@ def handlerCreatedPlan(self, event):
 
             tex_title = self.title
             tex_author = ""
-            # tex_institution = "Instituto de Matemáticas, Universidad Nacional Autónoma de México".decode('utf-8')
             tex_institution = "IM - UNAM"
             tex_phone = ""
             tex_email = ""
@@ -156,28 +162,35 @@ def handlerCreatedPlan(self, event):
             new_file = open(pdfname, "rb")
             self.textfile = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
             try:
-                logfile = file_path.replace('.tex', '.log')
-                auxfile = file_path.replace('.tex', '.aux')
-                os.remove(os.path.join(logfile))  # log file
-                os.remove(os.path.join(auxfile))  # aux file
-                os.remove(os.path.join(pdfname))  # pdf file
-                os.remove(file_path)  # tex file
-            except OSError:
+                shutil.rmtree(tempdir)  # remove tempdir
+            except:
                 pass
+
+        else:
+            self.textfile = None
+            self.text = ''
 
 
 @adapter(IPlan, IObjectModifiedEvent)
 def handlerModifiedPlan(self, event):
 
+    if self.REQUEST.get('orig_template', '') == 'folder_contents':
+        return
+
     plant = self.plan_type
     userid = api.user.get_current().id
     # Be carefull with this
     if userid == 'admin':
-        userid = self.Login()
+        # userid = self.Login()
+        try:
+            userid = self.Login()
+        except Exception:
+            userid = self.id
 
     if plant == 'plantext':
 
-        plantext = self.text
+        # plantext = self.text
+        plantext = self.REQUEST.get('form.widgets.text', '')
 
         if plantext:
 
@@ -233,12 +246,15 @@ def handlerModifiedPlan(self, event):
             pdfname = file_path.replace('.tex', '.pdf')
             new_file = open(pdfname, "rb")
             self.textfile = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
+
             try:
-                logfile = file_path.replace('.tex', '.log')
-                auxfile = file_path.replace('.tex', '.aux')
-                os.remove(os.path.join(logfile))  # log file
-                os.remove(os.path.join(auxfile))  # aux file
-                os.remove(os.path.join(pdfname))  # pdf file
-                os.remove(file_path)  # tex file
-            except OSError:
+                shutil.rmtree(tempdir)  # remove tempdir
+            except:
                 pass
+        else:
+            self.textfile = None
+            self.text = ''
+    else:
+
+        self.textfile = None
+        self.text = ''
