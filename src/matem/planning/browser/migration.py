@@ -5,7 +5,7 @@ from z3c.form import button
 from z3c.form import form
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
-
+from matem.planning.content.plan import defaultPlanText
 import logging
 
 
@@ -58,3 +58,27 @@ class MigrationForm(form.Form):
         else:
             obj = cvfolder['planes']
         return obj
+
+
+    @button.buttonAndHandler(u'create Plans')
+    def handle_new_plans(self, action):
+        logger.info('creatiing plans ...')
+        year = '2018'
+        reserchers = api.content.find(
+            context=api.portal.get()['fsd'],
+            depth=1,
+            portal_type='FSDPerson',
+            person_classification='investigadores',
+            review_state='active',
+        )
+        for brain in reserchers:
+            planfolder = self.getplanfolder(brain.id)
+            if year in planfolder:
+                continue
+            logger.info('Plan Folder {0}'.format(planfolder))
+            obj = api.content.create(
+                type='plan',
+                title='Plan de trabajo {0}'.format(year),
+                container=planfolder,
+                text=defaultPlanText(planfolder),
+                id=year)
