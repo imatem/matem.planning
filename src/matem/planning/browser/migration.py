@@ -82,3 +82,5 @@ class MigrationForm(form.Form):
                 container=planfolder,
                 text=defaultPlanText(planfolder),
                 id=year)
+            obj.setCreators(brain.id)
+            obj.reindexObject()
