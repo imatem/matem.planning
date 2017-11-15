@@ -42,7 +42,7 @@ def defaultPlanText(context):
     userl = pcatalog(portal_type='FSDPerson', id=id)
     if userl:
         if 'Investigadores' not in userl[0].getClassificationNames:
-            return ''
+            return u''
 
     now = DateTime('2018/01/01')
     projects = pcatalog(
