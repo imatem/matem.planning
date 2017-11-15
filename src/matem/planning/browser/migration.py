@@ -51,7 +51,7 @@ class MigrationForm(form.Form):
         if 'planes' not in cvfolder:
             obj = api.content.create(
                 type='PlanFolder',
-                title='Planes de Trabajo',
+                title='Plane de Trabajo',
                 container=cvfolder,
                 id='planes')
             api.content.transition(obj=obj, transition='submit_noteditable')
