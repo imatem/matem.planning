@@ -155,12 +155,23 @@ def handlerCreatedPlan(self, event):
                 file_os.write(fileTex)
                 file_os.close()
                 os.system("cd {0}; pdflatex -interaction=nonstopmode {1}".format(tempdir, file_path))
+                os.system("cd {0}; gs -o page1.png -sDEVICE=pngalpha -dLastPage=1 {1}".format(tempdir, file_path.replace('.tex', '.pdf')))
             except:
                 pass
 
             pdfname = file_path.replace('.tex', '.pdf')
             new_file = open(pdfname, "rb")
             self.textfile = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
+
+            image_path = os.path.join(tempdir, 'page1.png')
+            thumb_file = open(image_path, 'r')
+
+            self.thumbpdf = namedfile.NamedBlobImage(
+                data=thumb_file.read(),
+                contentType='image/png',
+                filename=u'page1.png'
+            )
+
             try:
                 shutil.rmtree(tempdir)  # remove tempdir
             except:
@@ -168,7 +179,40 @@ def handlerCreatedPlan(self, event):
 
         else:
             self.textfile = None
+            self.thumbpdf = None
             self.text = ''
+
+    else:
+
+        self.textfile = None
+        self.text = ''
+        if self.file:
+            try:
+
+                tempdir = tempfile.mkdtemp()
+                file_path = os.path.join(tempdir, 'plan.pdf')
+                file_os = open(file_path, 'wb')
+                file_os.write(self.file.data)
+                file_os.close()
+                os.system("cd {0}; gs -o page1.png -sDEVICE=pngalpha -dLastPage=1 {1}".format(tempdir, file_path))
+                image_path = os.path.join(tempdir, 'page1.png')
+                thumb_file = open(image_path, 'r')
+
+                self.thumbpdf = namedfile.NamedBlobImage(
+                    data=thumb_file.read(),
+                    contentType='image/png',
+                    filename=u'page1.png'
+                )
+            except:
+                self.thumbpdf = None
+
+            try:
+                shutil.rmtree(tempdir)  # remove tempdir
+            except:
+                pass
+
+        else:
+            self.thumbpdf = None
 
 
 @adapter(IPlan, IObjectModifiedEvent)
@@ -240,6 +284,7 @@ def handlerModifiedPlan(self, event):
                 file_os.write(fileTex)
                 file_os.close()
                 os.system("cd {0}; pdflatex -interaction=nonstopmode {1}".format(tempdir, file_path))
+                os.system("cd {0}; gs -o page1.png -sDEVICE=pngalpha -dLastPage=1 {1}".format(tempdir, file_path.replace('.tex', '.pdf')))
             except:
                 pass
 
@@ -247,14 +292,52 @@ def handlerModifiedPlan(self, event):
             new_file = open(pdfname, "rb")
             self.textfile = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
 
+            image_path = os.path.join(tempdir, 'page1.png')
+            thumb_file = open(image_path, 'r')
+
+            self.thumbpdf = namedfile.NamedBlobImage(
+                data=thumb_file.read(),
+                contentType='image/png',
+                filename=u'page1.png'
+            )
+
             try:
                 shutil.rmtree(tempdir)  # remove tempdir
             except:
                 pass
         else:
             self.textfile = None
+            self.thumbpdf = None
             self.text = ''
     else:
 
         self.textfile = None
         self.text = ''
+        if self.file:
+            try:
+
+                tempdir = tempfile.mkdtemp()
+                file_path = os.path.join(tempdir, 'plan.pdf')
+                file_os = open(file_path, 'wb')
+                file_os.write(self.file.data)
+                file_os.close()
+                os.system("cd {0}; gs -o page1.png -sDEVICE=pngalpha -dLastPage=1 {1}".format(tempdir, file_path))
+                image_path = os.path.join(tempdir, 'page1.png')
+                thumb_file = open(image_path, 'r')
+
+                self.thumbpdf = namedfile.NamedBlobImage(
+                    data=thumb_file.read(),
+                    contentType='image/png',
+                    filename=u'page1.png'
+                )
+            except:
+                self.thumbpdf = None
+
+            try:
+                shutil.rmtree(tempdir)  # remove tempdir
+            except:
+                pass
+
+        else:
+            self.thumbpdf = None
+
