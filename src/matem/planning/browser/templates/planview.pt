@@ -54,6 +54,7 @@
     <!-- <span tal:content="view/hasfile"/> -->
     <br/>
     <a href="#" class="mybutton"
+      tal:condition="python:context.aq_parent.aq_parent.aq_parent.portal_type == 'CVFolder'"
       tal:attributes="href python:context.aq_parent.aq_parent.absolute_url();">
       Ir a <span tal:content="python: context.aq_parent.aq_parent.Title()"/>
     </a>
