@@ -40,7 +40,7 @@
       template="templates/albumpdf.pt"
       for="Products.ATContentTypes.interface.IATFolder"
       class=".albumpdf.AlbumPdfView"
-      permission="cmf.ManagePortal"
+      permission="zope2.View"
     />
 
 
