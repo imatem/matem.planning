@@ -4,6 +4,7 @@
 from matem.planning import _
 from plone.directives import form
 from plone.namedfile.field import NamedBlobFile
+from plone.namedfile.field import NamedBlobImage
 from plone.supermodel import model
 from zope import schema
 
@@ -19,6 +20,8 @@ from zope.schema.interfaces import IContextAwareDefaultFactory
 from Products.CMFCore.utils import getToolByName
 from DateTime import DateTime
 from zope.i18n import translate
+
+from plone.autoform import directives
 
 
 from matem.planning.validators import isValidFileType
@@ -139,3 +142,11 @@ class IPlan(model.Schema):
         required=False,
         constraint=isValidFileType,
     )
+
+    directives.omitted('thumbpdf')
+    thumbpdf = NamedBlobImage(
+        title=_(u'ImageThumb'),
+        required=False,
+    )
+
+
