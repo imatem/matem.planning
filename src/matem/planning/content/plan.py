@@ -69,6 +69,8 @@ def defaultPlanText(context):
         topics = pcatalog(portal_type='FSDSpecialty', id=[topic.id for topic in obj.getResearchTopics()])
         topics = [unicode(t.Title, 'utf-8') for t in topics]
         sponsor = translate(obj.getSponsor(), 'UNAM.imateCVct', target_language='es')
+        if sponsor.lower() == 'interno':
+                sponsor = 'UNAM (Interno)'
         pnumber = obj.getProjectNumber()
         c1 = u"Trabajar como %s en un proyecto de %s" % (role, ptype)
         if pnumber:
