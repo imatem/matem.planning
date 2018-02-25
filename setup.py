@@ -45,6 +45,7 @@ setup(
         'plone.directives.form',
         'plone.app.dexterity',
         'plone.app.versioningbehavior',
+        'plone.formwidget.masterselect',
     ],
     extras_require={
         'test': [
