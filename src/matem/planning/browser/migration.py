@@ -63,7 +63,7 @@ class MigrationForm(form.Form):
     @button.buttonAndHandler(u'create Plans')
     def handle_new_plans(self, action):
         logger.info('creatiing plans ...')
-        year = '2018'
+        year = '2019'
         reserchers = api.content.find(
             context=api.portal.get()['fsd'],
             depth=1,
