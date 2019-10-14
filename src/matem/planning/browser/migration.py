@@ -72,7 +72,7 @@ class MigrationForm(form.Form):
             review_state='active',
         )
         for brain in reserchers:
-            if brain.id != 'andres':
+            if brain.id == 'andres':
                 continue
             planfolder = self.getplanfolder(brain.id)
             if year in planfolder:
