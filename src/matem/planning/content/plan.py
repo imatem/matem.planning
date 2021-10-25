@@ -26,6 +26,11 @@ from plone.autoform import directives
 
 from matem.planning.validators import isValidFileType
 
+from zope.interface import Interface
+from collective.z3cform.datagridfield import DictRow
+from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
+
+
 def PlanTypesVocabulary(context):
     items = [
         (_(u'By Text'), 'plantext'),
@@ -85,6 +90,30 @@ def defaultPlanText(context):
     return '\n\n'.join(plan)
 
 
+class IConferenceInfo(Interface):
+    conference_title = schema.TextLine(
+        title=_(u'label_conference_title', default=u'Título'),
+        required=False,
+    )
+
+    conference_month = schema.Choice(
+        title=_(u'label_conference_month', default=u'Mes probable de realización'),
+        vocabulary="matem.cv.vocabularies.MonthsVocabularyFactory",
+        required=False,
+    )
+
+    conference_institution = schema.TextLine(
+        title=_(u'label_conference_institution', default=u'Institución'),
+        required=False,
+    )
+
+    conference_scope = schema.Choice(
+        title=_(u'label_conference_', default=u'Ambito'),
+        vocabulary="matem.cv.vocabularies.EventType",
+        required=False,
+    )
+
+
 class IPlan(model.Schema):
     """Dexterity Schema for Plans."""
 
@@ -115,6 +144,12 @@ class IPlan(model.Schema):
                 'name': 'textfile',
                 'action': 'hide',
                 'hide_values': ('plantext', 'planfile'),
+                'siblings': True,
+            },
+            {
+                'name': 'conferences',
+                'action': 'hide',
+                'hide_values': ('planfile',),
                 'siblings': True,
             },
 
@@ -150,4 +185,16 @@ class IPlan(model.Schema):
         required=False,
     )
 
-
+    form.widget(
+        'conferences',
+        DataGridFieldFactory,
+        allow_reorder=True,
+        # allow_insert=False,
+        # allow_delete=False,
+        # auto_append=False,
+    )
+    conferences = schema.List(
+        title=_(u'label_conferences', u'Actividades Académiccas a organizar'),
+        value_type=DictRow(title=_(u'Conferencia'), schema=IConferenceInfo),
+        required=False,
+    )
