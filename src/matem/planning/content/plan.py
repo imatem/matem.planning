@@ -47,7 +47,7 @@ def defaultPlanText(context):
         if 'Investigadores' not in userl[0].getClassificationNames:
             return u''
 
-    now = DateTime('2021/01/01')
+    now = DateTime('2022/01/01')
     projects = pcatalog(
         portal_type='CVProject',
         participantInProject=[id],
@@ -70,7 +70,7 @@ def defaultPlanText(context):
         topics = [unicode(t.Title, 'utf-8') for t in topics]
         sponsor = translate(obj.getSponsor(), 'UNAM.imateCVct', target_language='es')
         if sponsor.lower() == 'interno':
-                sponsor = 'UNAM (Interno)'
+            sponsor = 'UNAM (Interno)'
         pnumber = obj.getProjectNumber()
         c1 = u"Trabajar como %s en un proyecto de %s" % (role, ptype)
         if pnumber:
@@ -83,7 +83,6 @@ def defaultPlanText(context):
         c5 = u"Objetivo del proyecto: %s" % unicode(obj.getAim(), 'utf-8')
         plan.append(u' '.join((c1, c11, c2, c4, c5)))
     return '\n\n'.join(plan)
-
 
 
 class IPlan(model.Schema):

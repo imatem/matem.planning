@@ -63,7 +63,7 @@ class MigrationForm(form.Form):
     @button.buttonAndHandler(u'create Plans')
     def handle_new_plans(self, action):
         logger.info('creatiing plans ...')
-        year = '2021'
+        year = '2022'
         reserchers = api.content.find(
             context=api.portal.get()['fsd'],
             depth=1,
@@ -72,8 +72,8 @@ class MigrationForm(form.Form):
             review_state='active',
         )
         for brain in reserchers:
-            if brain.id == 'callejas':
-                continue
+            # if brain.id == 'urrutia':
+            #     continue
             planfolder = self.getplanfolder(brain.id)
             if year in planfolder:
                 continue
