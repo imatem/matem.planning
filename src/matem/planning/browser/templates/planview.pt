@@ -19,6 +19,10 @@
           cursor: pointer;
           text-align: center;"
         }
+
+        .download{
+          display: none;
+        }
       </style>
   </metal:css>
 
