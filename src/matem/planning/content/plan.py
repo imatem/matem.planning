@@ -165,7 +165,7 @@ class IPlan(model.Schema):
             u'You can use article latex format and the packages included are: latexsym and amsmath'
         ),
         required=False,
-        defaultFactory=defaultPlanText,
+        # defaultFactory=defaultPlanText,
     )
 
     textfile = NamedBlobFile(
