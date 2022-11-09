@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from plone.dexterity.browser.view import DefaultView
+from plone import api
 
 
 class PlanView(DefaultView):
@@ -21,3 +22,9 @@ class PlanView(DefaultView):
             return self.context.textfile
 
         return self.context.file
+
+    def candownload(self):
+        current_state = api.content.get_state(self.context)
+        if current_state == 'sended':
+            return True
+        return False

@@ -19,11 +19,17 @@
           cursor: pointer;
           text-align: center;"
         }
+        
+      </style>
 
+    <tal:block tal:condition="python: not view.candownload()">
+      <style type="text/css">
         .download{
           display: none;
         }
       </style>
+    </tal:block>
+
   </metal:css>
 
 
