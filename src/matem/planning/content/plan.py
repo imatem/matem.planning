@@ -194,7 +194,7 @@ class IPlan(model.Schema):
         # auto_append=False,
     )
     conferences = schema.List(
-        title=_(u'label_conferences', u'Actividades Académiccas a organizar'),
+        title=_(u'label_conferences', u'Actividades Académicas a organizar'),
         value_type=DictRow(title=_(u'Conferencia'), schema=IConferenceInfo),
         required=False,
     )
