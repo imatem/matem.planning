@@ -45,7 +45,10 @@ directlyProvides(PlanTypesVocabulary, IVocabularyFactory)
 @provider(IContextAwareDefaultFactory)
 def defaultPlanText(context):
     ''' generateWorkPlan from repordsend.py '''
-    id = context.Login()
+    try:
+        id = context.Login()
+    except AttributeError:
+        return u''
     pcatalog = getToolByName(context, 'portal_catalog')
     userl = pcatalog(portal_type='FSDPerson', id=id)
     if userl:
