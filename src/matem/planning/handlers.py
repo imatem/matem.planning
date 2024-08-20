@@ -90,12 +90,29 @@ PLAN_LATEX_TEMPLATE = r"""
 """
 
 
+def makebody(research, teaching, students, divulgacion, notes):
+
+    sections = [
+        (u'Investigación', research),
+        (u'Docencia', teaching),
+        (u'Formación de recursos humanos', students),
+        (u'Divulgación, vinculación', divulgacion),
+        (u'Otros/Comentarios', notes),
+    ]
+
+    # body = ''
+    # for item in sections:
+    #     if item[1]:
+    #         body += u"\section*{%s} %s " % item
+    # return body
+    return ' '.join([u"\section*{%s} %s" % item for item in sections if item[1]])
+
+
 @adapter(IPlan, IObjectAddedEvent)
 def handlerCreatedPlan(self, event):
 
     plant = self.plan_type
     # userid = api.user.get_current().id
-    # import pdb; pdb.set_trace()
     # Be carefull with this
     # if userid == 'admin':
     try:
@@ -234,7 +251,14 @@ def handlerModifiedPlan(self, event):
     if plant == 'plantext':
 
         # plantext = self.text
-        plantext = self.REQUEST.get('form.widgets.text', '')
+        # plantext = self.REQUEST.get('form.widgets.text', '')
+
+        plantext = makebody(
+            self.text,
+            self.teaching,
+            self.students,
+            self.divulgacion,
+            self.notes)
 
         if plantext:
 
