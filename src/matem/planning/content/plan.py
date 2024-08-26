@@ -184,14 +184,14 @@ class IPlan(model.Schema):
             u'label_help_text',
             u'You can use article latex format. Packages included are: latexsym and amsmath'
         ),
-        required=False,
+        required=True,
         defaultFactory=defaultPlanText,
     )
 
     form.widget('teaching', cols=80, rows=10)
     teaching = schema.Text(
         title=_(u'Teaching'),
-        required=False,
+        required=True,
     )
 
     form.widget('students', rows=10)
@@ -229,14 +229,15 @@ class IPlan(model.Schema):
         required=False,
     )
 
-    form.widget(
-        'conferences',
-        DataGridFieldFactory,
-        allow_reorder=True,
-        # allow_insert=False,
-        # allow_delete=False,
-        # auto_append=False,
-    )
+    directives.omitted('conferences')
+    # form.widget(
+    #     'conferences',
+    #     DataGridFieldFactory,
+    #     allow_reorder=True,
+    #     # allow_insert=False,
+    #     # allow_delete=False,
+    #     # auto_append=False,
+    # )
     conferences = schema.List(
         title=_(u'label_conferences', u'Actividades Académicas a organizar'),
         value_type=DictRow(title=_(u'Conferencia'), schema=IConferenceInfo),
