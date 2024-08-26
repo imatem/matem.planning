@@ -1,34 +1,27 @@
 # -*- coding: utf-8 -*-
 """Module where all interfaces, events and exceptions live."""
 
+from collective.z3cform.datagridfield import DictRow
+from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
+from DateTime import DateTime
 from matem.planning import _
+from matem.planning.validators import isValidFileType
+from Products.CMFCore.utils import getToolByName
+from plone.autoform import directives
 from plone.directives import form
+from plone.formwidget.masterselect import MasterSelectField
 from plone.namedfile.field import NamedBlobFile
 from plone.namedfile.field import NamedBlobImage
 from plone.supermodel import model
 from zope import schema
-
-from plone.formwidget.masterselect import MasterSelectField
-# from Products.Archetypes.utils import DisplayList
+from zope.interface import directlyProvides
+from zope.interface import Interface
+from zope.interface import provider
+from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-from zope.interface import directlyProvides
-
-from zope.interface import provider
-from zope.schema.interfaces import IContextAwareDefaultFactory
-from Products.CMFCore.utils import getToolByName
-from DateTime import DateTime
 from zope.i18n import translate
-
-from plone.autoform import directives
-
-
-from matem.planning.validators import isValidFileType
-
-from zope.interface import Interface
-from collective.z3cform.datagridfield import DictRow
-from collective.z3cform.datagridfield.datagridfield import DataGridFieldFactory
 
 
 def PlanTypesVocabulary(context):
@@ -138,6 +131,30 @@ class IPlan(model.Schema):
                 'siblings': True,
             },
             {
+                'name': 'teaching',
+                'action': 'hide',
+                'hide_values': ('planfile',),
+                'siblings': True,
+            },
+            {
+                'name': 'students',
+                'action': 'hide',
+                'hide_values': ('planfile',),
+                'siblings': True,
+            },
+            {
+                'name': 'divulgacion',
+                'action': 'hide',
+                'hide_values': ('planfile',),
+                'siblings': True,
+            },
+            {
+                'name': 'notes',
+                'action': 'hide',
+                'hide_values': ('planfile',),
+                'siblings': True,
+            },
+            {
                 'name': 'file',
                 'action': 'hide',
                 'hide_values': ('plantext',),
@@ -160,15 +177,39 @@ class IPlan(model.Schema):
         ),
     )
 
-    form.widget('text', cols=80, rows=20)
+    form.widget('text', cols=80, rows=15)
     text = schema.Text(
-        title=_(u'Text'),
+        title=_(u'Research'),
         description=_(
             u'label_help_text',
-            u'You can use article latex format and the packages included are: latexsym and amsmath'
+            u'You can use article latex format. Packages included are: latexsym and amsmath'
         ),
-        required=False,
+        required=True,
         defaultFactory=defaultPlanText,
+    )
+
+    form.widget('teaching', cols=80, rows=10)
+    teaching = schema.Text(
+        title=_(u'Teaching'),
+        required=True,
+    )
+
+    form.widget('students', rows=10)
+    students = schema.Text(
+        title=_(u'Formación de recursos humanos'),
+        required=False,
+    )
+
+    form.widget('divulgacion', rows=10)
+    divulgacion = schema.Text(
+        title=_(u'Divulgación, vinculación'),
+        required=False,
+    )
+
+    form.widget('notes', rows=5)
+    notes = schema.Text(
+        title=_(u'otros/comentarios'),
+        required=False,
     )
 
     textfile = NamedBlobFile(
@@ -188,14 +229,15 @@ class IPlan(model.Schema):
         required=False,
     )
 
-    form.widget(
-        'conferences',
-        DataGridFieldFactory,
-        allow_reorder=True,
-        # allow_insert=False,
-        # allow_delete=False,
-        # auto_append=False,
-    )
+    directives.omitted('conferences')
+    # form.widget(
+    #     'conferences',
+    #     DataGridFieldFactory,
+    #     allow_reorder=True,
+    #     # allow_insert=False,
+    #     # allow_delete=False,
+    #     # auto_append=False,
+    # )
     conferences = schema.List(
         title=_(u'label_conferences', u'Actividades Académicas a organizar'),
         value_type=DictRow(title=_(u'Conferencia'), schema=IConferenceInfo),

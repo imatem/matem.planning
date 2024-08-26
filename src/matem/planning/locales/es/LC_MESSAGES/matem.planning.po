@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-01-30 22:01+0000\n"
+"POT-Creation-Date: 2024-08-26 20:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,13 +14,17 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: matem/planning/content/plan.py:21
+#: matem/planning/content/plan.py:30
 msgid "By File"
 msgstr "Por Archivo"
 
-#: matem/planning/content/plan.py:20
+#: matem/planning/content/plan.py:29
 msgid "By Text"
 msgstr "Por Texto"
+
+#: matem/planning/content/plan.py:243
+msgid "Conferencia"
+msgstr ""
 
 #: matem/planning/profiles/default/types/plan.xml
 msgid "Content for annual plans"
@@ -30,28 +34,48 @@ msgstr "Contenido para los planes anuales"
 msgid "Description"
 msgstr "Descripción"
 
-#: matem/planning/content/plan.py:73
+#: matem/planning/content/plan.py:205
+msgid "Divulgación, vinculación"
+msgstr ""
+
+#: matem/planning/content/plan.py:216
 msgid "File"
 msgstr "Archivo"
+
+#: matem/planning/content/plan.py:199
+msgid "Formación de recursos humanos"
+msgstr ""
+
+#: matem/planning/content/plan.py:228
+msgid "ImageThumb"
+msgstr ""
 
 #: matem/planning/configure.zcml:22
 msgid "Installs the matem.planning add-on."
 msgstr "Instalar el complemento matem.planning"
 
+#: matem/planning/validators.py:10
+msgid "Invalid Type File: please correct it, only accept pdf file"
+msgstr ""
+
 #: matem/planning/profiles/default/types/plan.xml
 msgid "Plan"
 msgstr "Plan"
 
-#: matem/planning/profiles/default/types/planfolder.xml
+#: matem/planning/profiles/default/types/PlanFolder.xml
 msgid "PlanFolder"
 msgstr "PlanFolder"
 
-#: matem/planning/content/plan.py:68
-msgid "Text"
-msgstr "Texto"
+#: matem/planning/content/plan.py:182
+msgid "Research"
+msgstr "Investigación"
+
+#: matem/planning/content/plan.py:193
+msgid "Teaching"
+msgstr "Docencia"
 
 #: matem/planning/content/interfaces.py:12
-#: matem/planning/content/plan.py:33
+#: matem/planning/content/plan.py:117
 msgid "Title"
 msgstr "Título"
 
@@ -59,16 +83,38 @@ msgstr "Título"
 msgid "Uninstalls the matem.planning add-on."
 msgstr "Desinstalar el complemento de matem.planning"
 
-#: plone/app/versioningbehavior/behaviors.py:25
-msgid "help_change_note"
+#. Default: "Ambito"
+#: matem/planning/content/plan.py:107
+msgid "label_conference_"
+msgstr "Ambito"
+
+#. Default: "Institución"
+#: matem/planning/content/plan.py:102
+msgid "label_conference_institution"
+msgstr "Institución"
+
+#. Default: "Mes probable de realización"
+#: matem/planning/content/plan.py:96
+msgid "label_conference_month"
 msgstr ""
 
-#: plone/app/versioningbehavior/behaviors.py:24
-msgid "label_change_note"
+#. Default: "Título"
+#: matem/planning/content/plan.py:91
+msgid "label_conference_title"
+msgstr "Título"
+
+#. Default: "Actividades Académicas a organizar"
+#: matem/planning/content/plan.py:242
+msgid "label_conferences"
 msgstr ""
+
+#. Default: "You can use article latex format. Packages included are: latexsym and amsmath"
+#: matem/planning/content/plan.py:183
+msgid "label_help_text"
+msgstr "Puedes usar formato latex. Los paquetes incluidos son: latexsym y amsmath "
 
 #. Default: "Plan type"
-#: matem/planning/content/plan.py:38
+#: matem/planning/content/plan.py:122
 msgid "label_plan_type"
 msgstr "Tipo de Plan"
 
@@ -78,4 +124,8 @@ msgstr ""
 
 #: matem/planning/configure.zcml:31
 msgid "matem.planning (uninstall)"
+msgstr ""
+
+#: matem/planning/content/plan.py:211
+msgid "otros/comentarios"
 msgstr ""
