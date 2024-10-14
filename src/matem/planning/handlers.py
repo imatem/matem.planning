@@ -270,6 +270,13 @@ def handlerModifiedPlan(self, event):
             tex_homepage = ""
             tex_date = ""
 
+            # text_conferences = "\n\n"
+            # conferences = self.conferences
+            # for conference in conferences:
+            #     text_conferences += 'En %s si se dan las condiciones necesarias, planeo organizar %s, con sede en %s. \n'%(conference['conference_month'], conference['conference_title'], conference['conference_institution'])
+
+            # plantext += text_conferences
+
             catalog = getToolByName(getSite(), 'portal_catalog')
             query = {
                 'portal_type': 'FSDPerson',
