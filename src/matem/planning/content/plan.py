@@ -119,6 +119,7 @@ class IPlan(model.Schema):
         required=True,
     )
 
+    directives.write_permission(plan_type='cmf.ManagePortal')
     plan_type = MasterSelectField(
         title=_(u'label_plan_type', default=u'Plan type'),
         vocabulary='matem.sis.PlanTypesVocabulary',
@@ -213,11 +214,13 @@ class IPlan(model.Schema):
         required=False,
     )
 
+    directives.write_permission(textfile='cmf.ManagePortal')
     textfile = NamedBlobFile(
         title=_(u'File'),
         required=False,
     )
 
+    directives.write_permission(file='cmf.ManagePortal')
     file = NamedBlobFile(
         title=_(u'File'),
         required=False,

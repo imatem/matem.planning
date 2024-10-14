@@ -178,7 +178,8 @@ def handlerCreatedPlan(self, event):
 
             pdfname = file_path.replace('.tex', '.pdf')
             new_file = open(pdfname, "rb")
-            self.textfile = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
+            with api.env.adopt_user(username='admin'):
+                self.textfile = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
 
             image_path = os.path.join(tempdir, 'page1.png')
             thumb_file = open(image_path, 'r')
@@ -195,13 +196,14 @@ def handlerCreatedPlan(self, event):
                 pass
 
         else:
-            self.textfile = None
+            with api.env.adopt_user(username='admin'):
+                self.textfile = None
             self.thumbpdf = None
             self.text = ''
 
     else:
-
-        self.textfile = None
+        with api.env.adopt_user(username='admin'):
+            self.textfile = None
         self.text = ''
         if self.file:
             try:
@@ -321,7 +323,8 @@ def handlerModifiedPlan(self, event):
 
             pdfname = file_path.replace('.tex', '.pdf')
             new_file = open(pdfname, "rb")
-            self.textfile = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
+            with api.env.adopt_user(username='admin'):
+                self.textfile = namedfile.NamedBlobFile(new_file.read(), filename=u"plan.pdf")
 
             image_path = os.path.join(tempdir, 'page1.png')
             thumb_file = open(image_path, 'r')
@@ -337,12 +340,13 @@ def handlerModifiedPlan(self, event):
             except:
                 pass
         else:
-            self.textfile = None
+            with api.env.adopt_user(username='admin'):
+                self.textfile = None
             self.thumbpdf = None
             self.text = ''
     else:
-
-        self.textfile = None
+        with api.env.adopt_user(username='admin'):
+            self.textfile = None
         self.text = ''
         if self.file:
             try:
