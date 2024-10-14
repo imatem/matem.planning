@@ -48,7 +48,8 @@ def defaultPlanText(context):
         if 'Investigadores' not in userl[0].getClassificationNames:
             return u''
 
-    now = DateTime('2024/01/01')
+    nextyear = str(DateTime().year() + 1)
+    now = DateTime('{0}/01/01'.format(nextyear))
     projects = pcatalog(
         portal_type='CVProject',
         participantInProject=[id],

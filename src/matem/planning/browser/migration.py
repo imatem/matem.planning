@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from datetime import date
 from plone import api
 from z3c.form import button
 from z3c.form import form
@@ -60,10 +61,11 @@ class MigrationForm(form.Form):
         return obj
 
 
-    @button.buttonAndHandler(u'create Plans')
+    @button.buttonAndHandler(u'create Plans for net year')
     def handle_new_plans(self, action):
+        """Create plans for net year"""
         logger.info('creatiing plans ...')
-        year = '2024'
+        year = str(date.today().year + 1)
         reserchers = api.content.find(
             context=api.portal.get()['fsd'],
             depth=1,
@@ -72,9 +74,14 @@ class MigrationForm(form.Form):
             review_state='active',
         )
         for brain in reserchers:
-            # if brain.id == 'urrutia':
-            #     continue
             planfolder = self.getplanfolder(brain.id)
+
+            if len(planfolder) > 1:
+                logger.warning('Plan Folder {0} has many plans'.format(planfolder))
+
+        for brain in reserchers:
+            planfolder = self.getplanfolder(brain.id)
+
             if year in planfolder:
                 continue
             logger.info('Plan Folder {0}'.format(planfolder))
