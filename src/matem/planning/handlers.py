@@ -123,7 +123,15 @@ def handlerCreatedPlan(self, event):
 
     if plant == 'plantext':
 
-        plantext = self.text
+        plantext = makebody(
+            self.text,
+            self.teaching,
+            self.students,
+            self.divulgacion,
+            self.notes)
+
+
+        # plantext = self.text
 
         if plantext:
 
@@ -249,7 +257,7 @@ def handlerModifiedPlan(self, event):
             userid = self.Login()
         except Exception:
             userid = self.id
-
+    
     if plant == 'plantext':
 
         # plantext = self.text
