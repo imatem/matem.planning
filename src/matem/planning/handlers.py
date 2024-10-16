@@ -28,6 +28,19 @@ PLAN_LATEX_TEMPLATE = r"""
     \usepackage[T1]{fontenc}
     \DeclareUnicodeCharacter{00A0}{ }
 
+    \renewcommand{\ttdefault}{fvm}
+    \usepackage{Rosario}
+    \usepackage[charter]{mathdesign}
+    \usepackage{mathscinet}
+    \usepackage[hyphens]{url}
+    \usepackage{geometry}
+    \usepackage{enumitem}
+    \usepackage{microtype}
+    \usepackage{sectsty}
+    \usepackage{titling}
+    \usepackage{xcolor}
+    \allsectionsfont{\normalfont\sffamily\bfseries}
+
     \usepackage{color}
     \usepackage{tikz}
 
@@ -81,7 +94,22 @@ PLAN_LATEX_TEMPLATE = r"""
     \date{%s}
 
     \begin{document}
-    \maketitle
+    
+
+    {\setlength{\unitlength}{1mm}
+        \begin{picture}(0,0)
+        \put(105,0){\includegraphics*[scale=0.27]{im-logo.pdf}}
+        \end{picture}}
+
+    \vspace*{-35pt}
+
+    \noindent
+    {\huge\scshape\thetitle}\\[8pt]
+    {\Large\bfseries\scshape\theauthor}\\[-5pt]
+    {\color{gray}\hrule}
+
+    \vspace*{30pt}
+
 
     %s
 
@@ -179,6 +207,17 @@ def handlerCreatedPlan(self, event):
                 file_os = open(file_path, 'wb')
                 file_os.write(fileTex)
                 file_os.close()
+                
+                # pdf logo
+                logotempath = os.path.join(tempdir, 'im-logo.pdf')
+                pdflogopath = os.path.dirname(os.path.realpath(__file__))+ '/browser/static/images/im-logo.pdf'
+                logofile = open(pdflogopath,"rb")
+                logodata = logofile.read()
+                img_os = open(logotempath, 'wb')
+                img_os.write(logodata)
+                img_os.close()
+                logofile.close()
+
                 os.system("cd {0}; pdflatex -interaction=nonstopmode {1}".format(tempdir, file_path))
                 os.system("cd {0}; gs -o page1.png -sDEVICE=pngalpha -dLastPage=1 {1}".format(tempdir, file_path.replace('.tex', '.pdf')))
             except:
@@ -324,6 +363,17 @@ def handlerModifiedPlan(self, event):
                 file_os = open(file_path, 'wb')
                 file_os.write(fileTex)
                 file_os.close()
+
+                # pdf logo
+                logotempath = os.path.join(tempdir, 'im-logo.pdf')
+                pdflogopath = os.path.dirname(os.path.realpath(__file__))+ '/browser/static/images/im-logo.pdf'
+                logofile = open(pdflogopath,"rb")
+                logodata = logofile.read()
+                img_os = open(logotempath, 'wb')
+                img_os.write(logodata)
+                img_os.close()
+                logofile.close()
+                
                 os.system("cd {0}; pdflatex -interaction=nonstopmode {1}".format(tempdir, file_path))
                 os.system("cd {0}; gs -o page1.png -sDEVICE=pngalpha -dLastPage=1 {1}".format(tempdir, file_path.replace('.tex', '.pdf')))
             except:
