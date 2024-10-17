@@ -290,7 +290,7 @@ def handlerModifiedPlan(self, event):
     plant = self.plan_type
     userid = api.user.get_current().id
     # Be carefull with this
-    if userid == 'admin':
+    if api.user.has_permission('Manage portal', username=userid):
         # userid = self.Login()
         try:
             userid = self.Login()
