@@ -20,7 +20,7 @@ import shutil
 PLAN_LATEX_TEMPLATE = r"""
     \documentclass[11pt, letterpaper]{article}
     \usepackage[utf8]{inputenc}
-    \usepackage[spanish]{babel}
+    \usepackage[spanish, es-noshorthands]{babel}
     \usepackage{graphics}
     \usepackage{graphicx}
     \usepackage{latexsym}
@@ -30,7 +30,7 @@ PLAN_LATEX_TEMPLATE = r"""
 
     \renewcommand{\ttdefault}{fvm}
     \usepackage{Rosario}
-    \usepackage[charter]{mathdesign}
+    \usepackage{fourier}
     \usepackage{mathscinet}
     \usepackage[hyphens]{url}
     \usepackage{geometry}
