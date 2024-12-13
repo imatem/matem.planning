@@ -19,7 +19,6 @@
           cursor: pointer;
           text-align: center;"
         }
-        
       </style>
 
     <tal:block tal:condition="python: not view.candownload()">
@@ -74,8 +73,7 @@
     <tal:block tal:condition="view/hasfile" tal:define="file view/getFile;">
 
       <tal:block tal:condition="view/viewButtonSendAgain">
-      <!-- ?pid=' + context.id -->
-        <a href="#" class="btn btn-danger" tal:attributes="href string:${context/absolute_url}/send_plan_again?again='xx'"> Enviar nuevamente</a>
+        <a href="#" class="mybutton" tal:attributes="href string:${context/absolute_url}/send_plan_again?again='xx'"> Enviar nuevamente</a>
       </tal:block>
 
     <br/><br/><br/>

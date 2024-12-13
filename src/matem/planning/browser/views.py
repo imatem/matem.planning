@@ -46,10 +46,12 @@ class PlanView(DefaultView):
         
         year_plan = int(plan_content.id)
         year_report = year_plan - 1
+        noappoved = []
         try:
             reports_path = '/acerca-de/estructura-interna/secretaria-academica/informes/investigadores/'+ str(year_report)
-            annual = api.content.get(reports_path)
-            noappoved = eval(annual.noapprovedplanparticipants)
+            with api.env.adopt_user(username='admin'):
+                annual = api.content.get(reports_path)
+                noappoved = eval(annual.noapprovedplanparticipants)
         except Exception:
             noappoved = []
         
@@ -80,8 +82,9 @@ class SendPlanAgainView(BrowserView):
             if self.request.form.get('again', ''):
                 plan_content = self.context
                 year_plan = plan_content.id
-                plans_path = '/acerca-de/estructura-interna/secretaria-academica/informes/planes/' + year_plan 
-                plan_folder = api.content.get(plans_path)
+                plans_path = '/acerca-de/estructura-interna/secretaria-academica/informes/planes/' + year_plan
+                with api.env.adopt_user(username='admin'):
+                    plan_folder = api.content.get(plans_path)
                 # crear una copia en plan_folder
                 # moverlo a los enviados
                 portal = getToolByName(self.context, 'portal_url').getPortalObject()
